@@ -1,0 +1,30 @@
+.connection-header-container{
+    display: flex;
+    border-bottom: 5px solid white;
+    margin: 0px 30px 0px 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-and-location{
+    width: 25%;
+}
+
+.user-location{
+    background-color: white;
+    width: 40%;
+}
+
+.internship-period{
+    width: 25%;
+}
+
+.sort-result{
+    width: 25%;
+}
+
+.user-profile-access{
+    width: 25%;
+}
