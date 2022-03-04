@@ -5,10 +5,9 @@ import "./connection-page-match-list.styles.scss";
 
 const MatchList = () => (
     <div className='match-list-container'>
-        <SingleMatch/>
-        <SingleMatch/>
-        <SingleMatch/>
-
+        <SingleMatch userName='steve-j'/>
+        <SingleMatch userName='bill-g'/>
+        <SingleMatch userName='steve-b'/>
     </div>
 )
 

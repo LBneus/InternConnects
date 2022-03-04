@@ -2,15 +2,8 @@ import React from "react";
 
 import "./connection-page-header.styles.scss";
 
-class ConnectionPageHeader extends React.Component{
-    constructor(){
-        super();
+const ConnectionPageHeader = () => (
 
-        this.state = {};
-    }
-
-    render() {
-        return (
             <div className="connection-header-container">
 
                 <div className="logo-and-location">
@@ -32,10 +25,8 @@ class ConnectionPageHeader extends React.Component{
                 </div>
 
             </div>
-        );
-    }
-    
-}
+
+)
 
 export default ConnectionPageHeader;
 
