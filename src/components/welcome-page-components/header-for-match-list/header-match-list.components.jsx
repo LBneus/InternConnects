@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./connection-page-header.styles.scss";
+import "./header-match-list.styles.scss";
 
 const ConnectionPageHeader = () => (
 

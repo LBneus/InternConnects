@@ -1,6 +1,6 @@
 import React from "react";
-import ConnectionPageHeader from "../../components/connection-page-header/connection-page-header.components";
-import MatchList from "../../components/connection-page-match-list/connection-page-match-list.components";
+import ConnectionPageHeader from "../../components/welcome-page-components/header-for-match-list/header-match-list.components";
+import MatchList from "../../components/welcome-page-components/match-list/match-list.components";
 
 import "./connection-page.styles.scss";
 

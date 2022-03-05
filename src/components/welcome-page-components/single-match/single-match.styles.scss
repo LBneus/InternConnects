@@ -1,0 +1,33 @@
+.single-match-container{
+    background-color: rgb(173, 173, 173);
+    height: 300px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    width: auto;
+
+
+    .img-container{
+        width: 20%;
+
+        .student-image{
+            height: 300px;
+            border-radius: 10px;
+            width: 100%;
+        }
+    }
+
+
+    .name-and-quick-information{
+        width: 40%;
+    }
+
+
+    .functionalities-and-bio{
+        width: 40%;
+    }
+
+    
+}
