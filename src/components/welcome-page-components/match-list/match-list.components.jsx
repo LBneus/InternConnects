@@ -5,9 +5,9 @@ import "./match-list.styles.scss";
 
 const MatchList = () => (
     <div className='match-list-container'>
-        <SingleMatch userName='steve-j' position='SDE intern at Apple'/>
-        <SingleMatch userName='bill-g' position='SDE intern at Microsoft'/>
-        <SingleMatch userName='steve-b' position='PM intern at Google'/>
+        <SingleMatch userName='steve-j' position='SDE Intern at Apple'/>
+        <SingleMatch userName='bill-g' position='SDE Intern at Microsoft'/>
+        <SingleMatch userName='steve-b' position='PM Intern at Google'/>
     </div>
 )
 
