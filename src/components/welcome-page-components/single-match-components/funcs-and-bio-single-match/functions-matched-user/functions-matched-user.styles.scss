@@ -1,0 +1,32 @@
+.matched-user-functions-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 10px 0px;
+
+
+    .matched-user-star-icon{
+        width: 20%;
+
+        .star-icon-for-matched-user{
+            height: 50px;
+            width: 50px;
+        }
+    }
+
+    .more-details-matched-user{
+        width: 30%;
+        background-color: white;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .contact-matched-user{
+        width: 30%;
+        background-color: white;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+}
