@@ -6,27 +6,32 @@
 
 
     .matched-user-star-icon{
-        width: 20%;
+        width: 12%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
 
         .star-icon-for-matched-user{
-            height: 50px;
-            width: 50px;
+            height: 40px;
+            width: 40px;
         }
     }
 
-    .more-details-matched-user{
-        width: 30%;
-        background-color: white;
+    .more-details-cover{
+        width: 35%;
         display: flex;
         flex-direction: row;
         justify-content: center;
+        align-items: center;
     }
 
-    .contact-matched-user{
-        width: 30%;
-        background-color: white;
+    .contact-matched-cover{
+        width: 35%;
         display: flex;
         flex-direction: row;
         justify-content: center;
+        align-items: center;
+
     }
 }
