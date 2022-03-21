@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    padding: 10px 0px;
 
 
     .matched-user-star-icon{
@@ -15,6 +14,10 @@
         .star-icon-for-matched-user{
             height: 40px;
             width: 40px;
+        }
+
+        .star-icon-for-matched-user:hover{
+            cursor: pointer;
         }
     }
 

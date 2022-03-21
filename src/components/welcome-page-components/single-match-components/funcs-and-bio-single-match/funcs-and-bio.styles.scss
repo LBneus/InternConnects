@@ -1,5 +1,16 @@
 .functions-and-bio-container{
+    display: flex;
+    flex-direction: column;
     padding: 10px;
     width: 40%;
     overflow: hidden;
+    height: 100%;
+
+    .matched-user-functions-container{
+        height: 20%;
+    }
+
+    .mathched-user-bio-container{
+        height: 80%;
+    }
 }

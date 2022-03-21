@@ -1,4 +1,13 @@
 .button-match-list{
     height: 30px;
     width: 140px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+
+}
+
+.button-match-list:hover{
+    cursor: pointer;
+    border: 2px solid blue;
 }
