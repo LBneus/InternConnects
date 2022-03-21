@@ -8,21 +8,23 @@ import "./header-match-list.styles.scss";
 
 const ConnectionPageHeader = ({userName}) => (
 
+    <div className="header-panel">
+
             <div className="connection-header-container">
 
                 <div className="logo-and-location">
                     <div className="logo-name">InternConnects</div>
-                    <LocationInput className="user-location" userLocation={"San Francisco"}/>
+                    <LocationInput className="user-location" userLocation={"San Francisco, CA"}/>
                 </div>
 
 
                 <div className="internship-period">
                     <div className="start-date">
-                        <DateInput userDirection="From" userDate="May 12, 2022"/>
+                        <DateInput userDirection="From" userDate="May 12, 2022" className="start-date"/>
                     </div>
 
                     <div className="end-date">
-                        <DateInput userDirection="To" userDate={"August 8, 2022"}/>
+                        <DateInput userDirection="To" userDate={"August 8, 2022"} className="end-date"/>
                     </div>
                 </div>
 
@@ -47,6 +49,8 @@ const ConnectionPageHeader = ({userName}) => (
 
 
             </div>
+
+    </div>
 
 )
 
