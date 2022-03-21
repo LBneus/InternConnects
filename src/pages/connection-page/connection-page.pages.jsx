@@ -14,7 +14,7 @@ class ConnectionPage extends React.Component{
     render() {
         return (
             <div>
-                <ConnectionPageHeader/>
+                <ConnectionPageHeader userName={'alex-erwin'}/>
                 <MatchList/>
             </div>
         );

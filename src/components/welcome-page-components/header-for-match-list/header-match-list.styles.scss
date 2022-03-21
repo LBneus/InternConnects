@@ -21,13 +21,22 @@
 }
 
 .internship-period{
-    width: 25%;
+    width: 20%;
 }
 
 .sort-result{
-    width: 25%;
+    width: 20%;
 }
 
 .user-profile-access{
-    width: 25%;
+    width: 20%;
+}
+
+.img-container{
+    width: 20%;
+
+    .profile-image{
+        border-radius: 100%;
+        height: 150px;
+    }
 }

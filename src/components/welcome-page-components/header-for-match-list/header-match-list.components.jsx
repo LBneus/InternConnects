@@ -1,8 +1,10 @@
 import React from "react";
 
+import ButtonMatchList from "../match-list/button-for-match-list/button-for-match-list.components";
+
 import "./header-match-list.styles.scss";
 
-const ConnectionPageHeader = () => (
+const ConnectionPageHeader = ({userName}) => (
 
             <div className="connection-header-container">
 
@@ -17,11 +19,15 @@ const ConnectionPageHeader = () => (
                 </div>
 
                 <div className="sort-results">
-                    <h4>Sort Results</h4>
+                    <ButtonMatchList ButtonName={"Sort Results"}/>
                 </div>
 
                 <div className="user-profile-access">
-                    <h4>My Information</h4>
+                    <ButtonMatchList ButtonName={"My Information"}/>
+                </div>
+
+                <div className="img-container">
+                    <img className="profile-image" src={`assets/profile-images/${userName}.jpg`} alt={userName}></img>
                 </div>
 
             </div>
