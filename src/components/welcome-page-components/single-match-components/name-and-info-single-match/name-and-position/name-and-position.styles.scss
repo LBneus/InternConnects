@@ -1,4 +1,14 @@
 .name-and-position{
     display: flex;
     flex-direction: row;
+
+    .matched-user-name-and-position{
+        font-size: 30px;
+
+        .matched-user-name{
+            font-weight: bold;
+            font-size: 40px;
+        }
+    }
+
 }

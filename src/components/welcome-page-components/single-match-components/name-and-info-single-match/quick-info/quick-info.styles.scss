@@ -1,3 +1,26 @@
-.quick-facts-category-name{
-    text-decoration: underline;
+.quick-facts-container{
+
+    font-weight: 500;
+    
+    .quick-facts-category-name{
+        text-decoration: underline;
+        margin-top: 3px;
+        margin-bottom: 7px;
+    }
+
+    .matched-user-date{
+        margin-left: 66px;
+    }
+
+    .matched-user-university{
+        margin-left: 25px;
+    }
+
+    .matched-user-major{
+        margin-left: 40px;
+    }
+
+    .matched-user-hometown{
+        margin-left: 15px;
+    }
 }

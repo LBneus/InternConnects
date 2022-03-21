@@ -1,14 +1,13 @@
 .location-input-container{
     
-    width: 400px;
+    width: 100%;
 
     .location-input{
         width: 100%;
         border-radius: 30px;
         padding: 7px;
-
-        
     }
+
     ::placeholder{
         font-size: 18px;
         padding-left: 4px;
