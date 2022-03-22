@@ -3,6 +3,7 @@ import React from "react";
 import ButtonMatchList from "../match-list/button-for-match-list/button-for-match-list.components";
 import LocationInput from "./location-input-info/location-input-info.components";
 import DateInput from "./date-input-info/date-input-info.components";
+import {Link} from "react-router-dom";
 
 import "./header-match-list.styles.scss";
 
@@ -13,9 +14,11 @@ const ConnectionPageHeader = ({userName}) => (
             <div className="connection-header-container">
 
                 <div className="logo-and-location">
-                    <div className="logo-name">InternConnects</div>
+                    <Link to='/welcomePage' className="logo-name">InternConnects</Link>
                     <LocationInput className="user-location" userLocation={"San Francisco, CA"}/>
                 </div>
+
+                
 
 
                 <div className="internship-period">
@@ -42,11 +45,9 @@ const ConnectionPageHeader = ({userName}) => (
                 </div>
 
 
-                <div className="img-container">
+                <Link to='/accountsPage' className="img-container">
                     <img className="profile-image" src={`assets/profile-images/${userName}.jpg`} alt={userName}></img>
-                </div>
-
-
+                </Link>
 
             </div>
 

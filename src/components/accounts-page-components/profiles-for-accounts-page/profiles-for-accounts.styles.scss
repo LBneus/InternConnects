@@ -1,0 +1,22 @@
+.profile-container{
+    background-color: white;
+    border: 2px solid white;
+    border-radius: 15px;
+    padding: 15px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 30px;
+
+    .user-location{
+        text-decoration: underline;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .start-date, .end-date, .date-to{
+        font-size: 15px;
+    }
+}

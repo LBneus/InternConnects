@@ -1,0 +1,20 @@
+.accounts-page{
+    color: white;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15%;
+     
+    h1, h2, h3, h4, h5{
+        margin: 10px;
+    }
+
+    .accounts-profiles-container{
+        display: flex;
+        flex-direction: row;
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+}
