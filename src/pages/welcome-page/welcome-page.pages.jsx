@@ -11,10 +11,11 @@ const WelcomePage = () => (
         <h3 className="access-information-message">
             InternConnects is only available to those with current .edu email address
         </h3>
-        <input placeholder={"Please enter your email for access"}/>
-
-        <Link to='/connectionPage'>GO TO CONNECTION LIST PAGE</Link>
-        
+        <input type="email" className="user-email" placeholder={"Enter your email"}/>
+        <input type="password" className="user-password" placeholder={"Enter your password"}/>
+        <Link to="/accountsPage">
+            <button className="log-in-button">Log In</button>
+        </Link>
     </div>
 )
 
