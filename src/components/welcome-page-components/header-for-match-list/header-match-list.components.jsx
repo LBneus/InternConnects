@@ -14,7 +14,7 @@ const ConnectionPageHeader = ({userName}) => (
             <div className="connection-header-container">
 
                 <div className="logo-and-location">
-                    <Link to='/welcomePage' className="logo-name">InternConnects</Link>
+                    <Link to='/' className="logo-name">InternConnects</Link>
                     <LocationInput className="user-location" userLocation={"San Francisco, CA"}/>
                 </div>
 
