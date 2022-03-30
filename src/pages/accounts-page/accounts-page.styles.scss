@@ -14,6 +14,7 @@
     .accounts-profiles-container{
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
         margin-top: 40px;
         margin-bottom: 20px;
     }

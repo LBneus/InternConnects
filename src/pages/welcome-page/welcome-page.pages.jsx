@@ -1,8 +1,8 @@
-import React, {useContext} from "react";
+import React from "react";
 
 import "./welcome-page.styles.scss"
 
-import {UserContext, useUserContext} from "../../UserContext";
+import { UUIDContext } from "../../UUIDContext";
 import {Link} from "react-router-dom";
 
 class WelcomePage extends React.Component {
@@ -10,18 +10,14 @@ class WelcomePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: false,
-
-            email:'',
-            password:'',
-            firstName:'',
-            lastName:'',
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
             newAccount: false,
 
-            userUUID:'',
-            upidCount: 0,
-            userProfiles:[],
-            response:''
+            userUUID: '',
+            response: ''
         }
         this.toggleAccountCreate = this.toggleAccountCreate.bind(this);
         this.sendLoginRequest = this.sendLoginRequest.bind(this);
@@ -29,37 +25,26 @@ class WelcomePage extends React.Component {
     }
 
     setEmailVal = e => {
-        this.setState({ email: e.currentTarget.value });
+        this.setState({email: e.currentTarget.value});
     }
 
     setPasswordVal = e => {
-        this.setState({ password: e.currentTarget.value });
+        this.setState({password: e.currentTarget.value});
     }
 
     setFirstName = e => {
-        this.setState({ firstName: e.currentTarget.value });
+        this.setState({firstName: e.currentTarget.value});
     }
 
     setLastName = e => {
-        this.setState({ lastName: e.currentTarget.value });
+        this.setState({lastName: e.currentTarget.value});
     }
 
     toggleAccountCreate() {
-        this.setState({ newAccount: !this.state.newAccount });
+        this.setState({newAccount: !this.state.newAccount});
     }
 
     sendLoginRequest() {
-        // const acctEmail = this.state.email;
-        // const acctPassword = this.state.password;
-        // let jsonRequest = JSON.stringify({ "userEmail": acctEmail, "hashedPassword": acctPassword })
-        //
-        // let request = new XMLHttpRequest();
-        // request.open('POST', ' https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/accounts/login');
-        // request.send(jsonRequest);
-        // request.onload = () => {
-        //     response = JSON.parse(request.response);
-        // }
-
         fetch("https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/accounts/login", {
             "method": "POST",
             "body": JSON.stringify({
@@ -70,15 +55,12 @@ class WelcomePage extends React.Component {
             .then(response => response.json())
             .then(response => {
                 if (response.success) {
-
-                    const {globalUUID, setGlobalUUID} = useUserContext();
-
                     this.setState({
                         userUUID: response.IC_UUID,
                         upidCount: response.numUPIDs,
                         userProfiles: response.associatedProfileList
                     })
-                    setGlobalUUID(response.IC_UUID);
+                    this.context.setUserUUID({userUUID: response.IC_UUID})
                 }
             })
             .catch(err => {
@@ -117,41 +99,31 @@ class WelcomePage extends React.Component {
                        onChange={(e) => this.setEmailVal(e)}/>
                 <input type="password" className="user-password" placeholder={"Enter your password"}
                        onChange={(e) => this.setPasswordVal(e)}/>
-                { this.state.newAccount &&
+                {this.state.newAccount &&
                     <input type="text" className="user-email" placeholder={"Enter your first name"}
-                           onChange={(e) => this.setFirstName(e)}/> }
-                { this.state.newAccount &&
+                           onChange={(e) => this.setFirstName(e)}/>}
+                {this.state.newAccount &&
                     <input type="text" className="user-email" placeholder={"Enter your last name"}
-                           onChange={(e) => this.setLastName(e)}/> }
+                           onChange={(e) => this.setLastName(e)}/>}
                 <button type="submit" className="log-in-button"
                         onClick={this.state.newAccount ? this.sendCreateAccountRequest : this.sendLoginRequest}>{submitRequestMsg}</button>
                 <button className="switch-mode-button" onClick={this.toggleAccountCreate}>{changeModeMsg}</button>
-                <Link to={{
-                    pathname: '/accountsPage',
-                    state: { userEmail: this.state.userEmail, ic_uuid: this.state.ic_uuid, profileCount: this.state.profileCount }
-                }}>
-                {/*<Link to="/accountsPage">*/}
+                {/*<Link to={{*/}
+                {/*    pathname: '/accountsPage',*/}
+                {/*    state: {*/}
+                {/*        userEmail: this.state.userEmail,*/}
+                {/*        ic_uuid: this.state.ic_uuid,*/}
+                {/*        profileCount: this.state.profileCount*/}
+                {/*    }*/}
+                {/*}}>*/}
+                    <Link to="/accountsPage">
                     <button className="log-in-button">Passthrough</button>
                 </Link>
-                {/*<h1>UPIDCNT: {this.state.userUUID}</h1>*/}
             </div>
         );
     }
 }
 
-// const WelcomePage = () => (
-//
-//     <div className="welcome-page">
-//         <h1 className="welcome-message">Welcome to InternConnects</h1>
-//         <h3 className="access-information-message">
-//             InternConnects is only available to those with current .edu email address
-//         </h3>
-//         <input type="email" className="user-email" placeholder={"Enter your email"}/>
-//         <input type="password" className="user-password" placeholder={"Enter your password"}/>
-//         <Link to="/accountsPage">
-//             <button className="log-in-button">Log In</button>
-//         </Link>
-//     </div>
-// )
+WelcomePage.contextType = UUIDContext;
 
 export default WelcomePage;
