@@ -57,8 +57,6 @@ class WelcomePage extends React.Component {
                 if (response.success) {
                     this.setState({
                         userUUID: response.IC_UUID,
-                        upidCount: response.numUPIDs,
-                        userProfiles: response.associatedProfileList
                     })
                     this.context.setUserUUID({userUUID: response.IC_UUID})
                 }
@@ -91,10 +89,12 @@ class WelcomePage extends React.Component {
 
         return (
             <div className="welcome-page">
+
                 <h1 className="welcome-message">Welcome to InternConnects</h1>
                 <h3 className="access-information-message">
                     InternConnects is only available to those with current .edu email address
                 </h3>
+
                 <input type="email" className="user-email" placeholder={"Enter your email"}
                        onChange={(e) => this.setEmailVal(e)}/>
                 <input type="password" className="user-password" placeholder={"Enter your password"}
@@ -105,18 +105,11 @@ class WelcomePage extends React.Component {
                 {this.state.newAccount &&
                     <input type="text" className="user-email" placeholder={"Enter your last name"}
                            onChange={(e) => this.setLastName(e)}/>}
+
                 <button type="submit" className="log-in-button"
                         onClick={this.state.newAccount ? this.sendCreateAccountRequest : this.sendLoginRequest}>{submitRequestMsg}</button>
                 <button className="switch-mode-button" onClick={this.toggleAccountCreate}>{changeModeMsg}</button>
-                {/*<Link to={{*/}
-                {/*    pathname: '/accountsPage',*/}
-                {/*    state: {*/}
-                {/*        userEmail: this.state.userEmail,*/}
-                {/*        ic_uuid: this.state.ic_uuid,*/}
-                {/*        profileCount: this.state.profileCount*/}
-                {/*    }*/}
-                {/*}}>*/}
-                    <Link to="/accountsPage">
+                <Link to="/accountsPage">
                     <button className="log-in-button">Passthrough</button>
                 </Link>
             </div>

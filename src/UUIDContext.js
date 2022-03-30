@@ -9,7 +9,9 @@ export class UUIDContextProvider extends React.Component {
         this.setUserUUID = this.setUserUUID.bind(this)
         this.state = {
             userUUID: '',
-            setUserUUID: this.setUserUUID
+            setUserUUID: this.setUserUUID,
+            selectedUPID: '',
+            setSelectedUPID: this.setSelectedUPID
         };
     }
 
@@ -17,9 +19,16 @@ export class UUIDContextProvider extends React.Component {
         this.setState(values);
     }
 
+    setSelectedUPID = (values) => {
+        this.setState(values)
+    }
+
     render() {
         return (
-            <UUIDContext.Provider value={{userUUID: this.state.userUUID, setUserUUID: this.state.setUserUUID}}>
+            <UUIDContext.Provider value={{userUUID: this.state.userUUID,
+                setUserUUID: this.state.setUserUUID,
+                selectedUPID: this.state.selectedUPID,
+                setSelectedUPID: this.state.setSelectedUPID}}>
                 {this.props.children}
             </UUIDContext.Provider>
         )

@@ -4,11 +4,11 @@ import MatchList from "../../components/welcome-page-components/match-list/match
 
 
 import "./connection-page.styles.scss";
+import { UUIDContext } from "../../UUIDContext";
 
 class ConnectionPage extends React.Component{
-    constructor(){
-        super();
-
+    constructor(props){
+        super(props);
         this.state = {};
     }
 
@@ -17,9 +17,13 @@ class ConnectionPage extends React.Component{
             <div>
                 <ConnectionPageHeader userName={'alex-erwin'}/>
                 <MatchList/>
+                <h1>Current UPID {this.context.selectedUPID}</h1>
+                <h1>Current UUID {this.context.userUUID}</h1>
             </div>
         );
     }
 }
+
+ConnectionPage.contextType = UUIDContext;
 
 export default ConnectionPage;

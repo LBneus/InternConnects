@@ -13,17 +13,35 @@ class AccountsPage extends React.Component {
         this.setState({
             ic_uuid: this.context.userUUID
         })
+        fetch("https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/homepage", {
+            "method": "GET",
+            "headers": { IC_UUID: this.context.userUUID }
+        })
+            .then(response => response.json())
+            .then(response=> {
+                if (response.success) {
+                    this.setState({
+                        firstName: response.userName,
+                        profileCount: response.numUPIDs,
+                        profileList: response.associatedProfileList,
+                    })
+                }
+            })
     }
 
     constructor(props, context) {
         super(props, context);
         this.state = {
-            userEmail: '',
-            userName: '',
+            firstName: '',
             ic_uuid: this.context.uuid,
             profileCount: 0,
             profileList: []
         }
+        this.signOutOfAccount = this.signOutOfAccount.bind(this);
+    }
+
+    signOutOfAccount() {
+        this.context.setUserUUID({userUUID: ''})
     }
 
     render() {
@@ -34,18 +52,26 @@ class AccountsPage extends React.Component {
                     You are signed in as:
                 </h5>
                 <h5 className="account-information-email">
-                    , {this.context.userUUID}, {this.state.ic_uuid}
+                    {this.state.firstName}
                 </h5>
 
                 <Link to="/">
-                    <button className="account-page-signout-button">Sign Out</button>
+                    <button className="account-page-signout-button" onClick={this.signOutOfAccount}>Sign Out</button>
                 </Link>
 
                 <div className="accounts-profiles-container">
-                    <ProfileForAccountsPage className="already-created-profile"/>
-                    <CreateProfileAccounts className="create-new-profile"/>
+                    {(this.state.profileCount > 0) &&
+                        <ProfileForAccountsPage profile={this.state.profileList[0]}
+                                                className="already-created-profile"/>}
+                    {(this.state.profileCount > 1) &&
+                        <ProfileForAccountsPage profile={this.state.profileList[1]}
+                                                className="already-created-profile"/>}
+                    {(this.state.profileCount > 2) &&
+                        <ProfileForAccountsPage profile={this.state.profileList[2]}
+                                                className="already-created-profile"/>}
+                    {(this.state.profileCount < 3) &&
+                        <CreateProfileAccounts className="create-new-profile"/>}
                 </div>
-
 
                 <h6 className="listing-message">(select profile to view listings)</h6>
             </div>
