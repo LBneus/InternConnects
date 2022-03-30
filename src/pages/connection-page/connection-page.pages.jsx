@@ -7,18 +7,41 @@ import "./connection-page.styles.scss";
 import { UUIDContext } from "../../UUIDContext";
 
 class ConnectionPage extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {};
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            matchCount: 0,
+            matchList: [],
+            userProfile: Object,
+
+            location: '',
+            arrivalDate: '',
+            departureDate: ''
+        };
+    }
+
+    componentDidMount() {
+        fetch("https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/match", {
+            "method": "GET",
+            "headers": { IC_UUID: this.context.userUUID, IC_UPID: this.context.selectedUPID }
+        })
+            .then(response => response.json())
+            .then(response => {
+                if (response.success) {
+                    this.setState({
+                        matchCount: response.profileCount,
+                        userProfile: response.myProfile,
+                        matchList: response.profileList,
+                    })
+                }
+            })
     }
 
     render() {
         return (
             <div>
-                <ConnectionPageHeader userName={'alex-erwin'}/>
-                <MatchList/>
-                <h1>Current UPID {this.context.selectedUPID}</h1>
-                <h1>Current UUID {this.context.userUUID}</h1>
+                <ConnectionPageHeader userName={'alex-erwin'} myProfile={this.state.userProfile}/>
+                <MatchList profileList={this.state.profileList}/>
             </div>
         );
     }

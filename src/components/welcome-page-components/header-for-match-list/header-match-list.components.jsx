@@ -7,53 +7,62 @@ import {Link} from "react-router-dom";
 
 import "./header-match-list.styles.scss";
 
-const ConnectionPageHeader = ({userName}) => (
+class ConnectionPageHeader extends React.Component {
 
-    <div className="header-panel">
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            userProfile: this.props.myProfile,
+        }
+    }
 
-            <div className="connection-header-container">
+    render() {
+        return (
+            <div className="header-panel">
 
-                <div className="logo-and-location">
-                    <Link to='/' className="logo-name">InternConnects</Link>
-                    <LocationInput className="user-location" userLocation={"San Francisco, CA"}/>
+                <div className="connection-header-container">
+
+                    <div className="logo-and-location">
+                        <Link to='/' className="logo-name">InternConnects</Link>
+                        <LocationInput className="user-location" userLocation={'Seattle, WA'}/>
+                    </div>
+
+
+                    <div className="internship-period">
+                        <div className="start-date">
+                            <DateInput userDirection="From" userDate="May 12, 2022" className="start-date"/>
+                        </div>
+
+                        <div className="end-date">
+                            <DateInput userDirection="To" userDate={"August 8, 2022"} className="end-date"/>
+                        </div>
+                    </div>
+
+
+                    <div className="header-functionalities-container">
+
+                        <div className="sort-results">
+                            <ButtonMatchList ButtonName={"Sort Results"}/>
+                        </div>
+
+                        <div className="user-profile-access">
+                            <ButtonMatchList ButtonName={"My Information"}/>
+                        </div>
+
+                    </div>
+
+
+                    <Link to='/accountsPage' className="img-container">
+                        <img className="profile-image" src={`assets/profile-images/alex-erwin.jpg`}
+                             alt='alex-erwin'/>
+                    </Link>
+
                 </div>
-
-                
-
-
-                <div className="internship-period">
-                    <div className="start-date">
-                        <DateInput userDirection="From" userDate="May 12, 2022" className="start-date"/>
-                    </div>
-
-                    <div className="end-date">
-                        <DateInput userDirection="To" userDate={"August 8, 2022"} className="end-date"/>
-                    </div>
-                </div>
-
-    
-                <div className="header-functionalities-container">
-
-                    <div className="sort-results">
-                        <ButtonMatchList ButtonName={"Sort Results"}/>
-                    </div>
-
-                    <div className="user-profile-access">
-                        <ButtonMatchList ButtonName={"My Information"}/>
-                    </div>
-
-                </div>
-
-
-                <Link to='/accountsPage' className="img-container">
-                    <img className="profile-image" src={`assets/profile-images/${userName}.jpg`} alt={userName}></img>
-                </Link>
 
             </div>
-
-    </div>
-
-)
+        )
+    }
+}
 
 export default ConnectionPageHeader;
 

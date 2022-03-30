@@ -2,10 +2,22 @@ import React from "react";
 
 import "./location-input-info.styles.scss";
 
-const LocationInput = ({userLocation}) => (
-    <div className="location-input-container">
-        <input placeholder={userLocation} className="location-input"></input>
-    </div>
-)
+class LocationInput extends React.Component {
+
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            userLocation: this.props.userLocation
+        }
+    }
+
+    render() {
+        return (
+            <div className="location-input-container">
+                <input placeholder={this.state.userLocation} className="location-input"/>
+            </div>
+        )
+    }
+}
 
 export default LocationInput;
