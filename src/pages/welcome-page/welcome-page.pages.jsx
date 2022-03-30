@@ -45,13 +45,10 @@ class WelcomePage extends React.Component {
     }
 
     sendLoginRequest() {
-        fetch("https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/accounts/login", {
-            "method": "POST",
-            "body": JSON.stringify({
-                userEmail: this.state.email,
-                hashedPassword: this.state.password
-            })
-        })
+        fetch("https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/accounts", {
+            "method": "GET",
+            "headers": { User_Email: this.state.email, Hashed_Password: this.state.password}
+    })
             .then(response => response.json())
             .then(response => {
                 if (response.success) {
