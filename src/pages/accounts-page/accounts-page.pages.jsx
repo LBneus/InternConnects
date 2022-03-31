@@ -4,32 +4,81 @@ import CreateProfileAccounts from "../../components/accounts-page-components/cre
 
 import { Link } from "react-router-dom";
 
-
+import { UUIDContext } from "../../UUIDContext";
 import "./accounts-page.styles.scss"
 
-const AccountsPage = () => (
+class AccountsPage extends React.Component {
 
-    <div className="accounts-page">
-        <h1 className="accounts-welcome-message">Welcome to InternConnects</h1>
-        <h5 className="account-information-message">
-            You are signed in as:
-        </h5>  
-        <h5 className="account-information-email">
-            alexander.j.erwin@vanderbilt.edu
-        </h5> 
+    componentDidMount() {
+        this.setState({
+            ic_uuid: this.context.userUUID
+        })
+        fetch("https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/homepage", {
+            "method": "GET",
+            "headers": { IC_UUID: this.context.userUUID }
+        })
+            .then(response => response.json())
+            .then(response=> {
+                if (response.success) {
+                    this.setState({
+                        firstName: response.userName,
+                        profileCount: response.numUPIDs,
+                        profileList: response.associatedProfileList,
+                    })
+                }
+            })
+    }
 
-        <Link to="/">
-            <button className="account-page-signout-button">Sign Out</button>
-        </Link>
-        
-        <div className="accounts-profiles-container">
-            <ProfileForAccountsPage className="already-created-profile"/>
-            <CreateProfileAccounts className="create-new-profile"/>
-        </div>
-        
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            firstName: '',
+            ic_uuid: this.context.uuid,
+            profileCount: 0,
+            profileList: []
+        }
+        this.signOutOfAccount = this.signOutOfAccount.bind(this);
+    }
 
-        <h6 className="listing-message">(select profile to view listings)</h6>
-    </div>
-)
+    signOutOfAccount() {
+        this.context.setUserUUID({userUUID: ''})
+    }
+
+    render() {
+        return (
+            <div className="accounts-page">
+                <h1 className="accounts-welcome-message">Welcome to InternConnects!</h1>
+                <h5 className="account-information-message">
+                    You are signed in as:
+                </h5>
+                <h5 className="account-information-email">
+                    {this.state.firstName}
+                </h5>
+
+                <Link to="/">
+                    <button className="account-page-signout-button" onClick={this.signOutOfAccount}>Sign Out</button>
+                </Link>
+
+                <div className="accounts-profiles-container">
+                    {(this.state.profileCount > 0) &&
+                        <ProfileForAccountsPage profile={this.state.profileList[0]}
+                                                className="already-created-profile"/>}
+                    {(this.state.profileCount > 1) &&
+                        <ProfileForAccountsPage profile={this.state.profileList[1]}
+                                                className="already-created-profile"/>}
+                    {(this.state.profileCount > 2) &&
+                        <ProfileForAccountsPage profile={this.state.profileList[2]}
+                                                className="already-created-profile"/>}
+                    {(this.state.profileCount < 3) &&
+                        <CreateProfileAccounts className="create-new-profile"/>}
+                </div>
+
+                <h6 className="listing-message">(select profile to view listings)</h6>
+            </div>
+        )
+    }
+}
+
+AccountsPage.contextType = UUIDContext;
 
 export default AccountsPage;
