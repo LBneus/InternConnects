@@ -21,7 +21,9 @@ class WelcomePage extends React.Component {
 
             loading: false,
             blankField: false,
-            nonEduEmail: false
+            nonEduEmail: false,
+            signInFail: false,
+            signInFailMessage: ''
         }
         this.toggleAccountCreate = this.toggleAccountCreate.bind(this);
         this.sendLoginRequest = this.sendLoginRequest.bind(this);
@@ -59,7 +61,7 @@ class WelcomePage extends React.Component {
             this.setState({ nonEduEmail: true });
 
         } else {
-            this.setState({loading: true});
+            this.setState({loading: true, signInFail: false});
             fetch("https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/accounts", {
                 "method": "GET",
                 "headers": {User_Email: this.state.email, Hashed_Password: this.state.password}
@@ -71,6 +73,11 @@ class WelcomePage extends React.Component {
                             userUUID: response.IC_UUID,
                         })
                         this.context.setUserUUID({userUUID: response.IC_UUID})
+                    } else {
+                        this.setState({
+                            signInFail: true,
+                            signInFailMessage: response.failureMessage
+                        })
                     }
                 })
                 .catch(err => {
@@ -117,8 +124,6 @@ class WelcomePage extends React.Component {
 
         let changeModeMsg = this.state.newAccount ? "Switch To Log In" : "Switch to Create Account";
         let submitRequestMsg = this.state.newAccount ? "Create Account" : "Log In";
-        let loadingMessage = this.state.newAccount ? "Creating Account..." : "Logging In...";
-        let buttonMessage = this.loading ? loadingMessage : submitRequestMsg;
 
         return (
             <div className="welcome-page">
@@ -149,8 +154,11 @@ class WelcomePage extends React.Component {
 
 
                 <button type="submit" className="log-in-button"
-                        onClick={this.state.newAccount ? this.sendCreateAccountRequest : this.sendLoginRequest}>{buttonMessage}</button>
+                        onClick={this.state.newAccount ? this.sendCreateAccountRequest : this.sendLoginRequest}>{submitRequestMsg}</button>
                 <button className="switch-mode-button" onClick={this.toggleAccountCreate}>{changeModeMsg}</button>
+
+                {this.state.signInFail &&
+                    <h5>Error: {this.state.signInFailMessage}</h5>}
             </div>
         );
     }

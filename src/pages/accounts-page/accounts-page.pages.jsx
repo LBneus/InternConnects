@@ -13,20 +13,23 @@ class AccountsPage extends React.Component {
         this.setState({
             ic_uuid: this.context.userUUID
         })
-        fetch("https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/homepage", {
-            "method": "GET",
-            "headers": { IC_UUID: this.context.userUUID }
-        })
-            .then(response => response.json())
-            .then(response=> {
-                if (response.success) {
-                    this.setState({
-                        firstName: response.userName,
-                        profileCount: response.numUPIDs,
-                        profileList: response.associatedProfileList,
-                    })
-                }
+        let uuid = this.context.userUUID;
+        if (uuid !== '') {
+            fetch("https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/homepage", {
+                "method": "GET",
+                "headers": {IC_UUID: this.context.userUUID}
             })
+                .then(response => response.json())
+                .then(response => {
+                    if (response.success) {
+                        this.setState({
+                            firstName: response.userName,
+                            profileCount: response.numUPIDs,
+                            profileList: response.associatedProfileList,
+                        })
+                    }
+                })
+        }
     }
 
     constructor(props, context) {
