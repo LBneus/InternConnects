@@ -2,7 +2,7 @@ import React from "react";
 import ProfileForAccountsPage from "../../components/accounts-page-components/profiles-for-accounts-page/profiles-for-accounts.components";
 import CreateProfileAccounts from "../../components/accounts-page-components/create-profile-accounts-page/create-profile-accounts-page.components";
 
-import { Link } from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 
 import { UUIDContext } from "../../UUIDContext";
 import "./accounts-page.styles.scss"
@@ -45,6 +45,13 @@ class AccountsPage extends React.Component {
     }
 
     render() {
+        let uuid = this.context.userUUID;
+        if (uuid.toString() === '') {
+            return(
+                <Redirect to={"/"}/>
+            )
+        }
+
         return (
             <div className="accounts-page">
                 <h1 className="accounts-welcome-message">Welcome to InternConnects!</h1>
