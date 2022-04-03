@@ -1,0 +1,48 @@
+.create-profile-form-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+
+
+    .create-profile-form-content{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;  
+
+        
+        .create-profile-form-content > *{ 
+             margin: 20px;
+        }
+
+        .user-details{
+            display: flex;
+            flex-direction: row;
+            margin-right: 20px;
+        }
+    
+    }
+
+    .user-about-and-priorities{
+        margin-left: 20px;
+    }
+
+    .submit-create-form-button{
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+    }
+}
+
+
+.user-about .user-about-input{
+    min-height: 200px;
+}
+
+.user-priorities .user-about-input{
+    height: 200px;
+}
+
