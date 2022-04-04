@@ -2,9 +2,16 @@ import React from "react";
 
 import "./date-input-info.styles.scss";
 
-const DateInput = ({userDate, userDirection}) => (
+const DateInput = ({userDateInfo, userDirection}) => (
     <div className="date-input-container">
-        {userDirection} <input type="text" placeholder={userDate} className="date-input"/>
+    
+        { 
+            userDirection === "From" ? 
+            <div class="date-input-container"><span>From</span><span className="date-input">  {userDateInfo.arrivalMonth} {userDateInfo.arrivalDay}, {userDateInfo.arrivalYear} </span></div>
+            :
+            <div class="date-input-container"><span>To</span><span className="date-input">  {userDateInfo.departureMonth} {userDateInfo.departureDay}, {userDateInfo.departureYear} </span></div>
+        }
+
     </div>
 )
 

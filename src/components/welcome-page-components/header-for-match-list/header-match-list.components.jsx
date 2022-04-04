@@ -30,11 +30,11 @@ class ConnectionPageHeader extends React.Component {
 
                     <div className="internship-period">
                         <div className="start-date">
-                            <DateInput userDirection="From" userDate="May 12, 2022" className="start-date"/>
+                            <DateInput userDirection="From" userDateInfo={this.state.userProfile} className="start-date"/>
                         </div>
 
                         <div className="end-date">
-                            <DateInput userDirection="To" userDate={"August 8, 2022"} className="end-date"/>
+                            <DateInput userDirection="To" userDateInfo={this.state.userProfile} className="end-date"/>
                         </div>
                     </div>
 

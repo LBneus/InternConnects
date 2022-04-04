@@ -5,10 +5,10 @@ import MatchedUserFunctions from "./functions-matched-user/functions-matched-use
 
 import "./funcs-and-bio.styles.scss";
 
-const FuncsAndBio = () => (
+const FuncsAndBio = ({FuncsAndBioProps}) => (
     <div className="functions-and-bio-container">
         <MatchedUserFunctions/>
-        <MatchedUserBio/>
+        <MatchedUserBio MatchedUserBioProps={FuncsAndBioProps}/>
     </div>
 )
 

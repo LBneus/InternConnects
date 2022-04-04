@@ -6,15 +6,19 @@ import FuncsAndBio from "../single-match-components/funcs-and-bio-single-match/f
 
 import "./single-match.styles.scss";
 
-const SingleMatch = ({userName, position})=> (
+const SingleMatch = (props)=> {
 
-    <div className="single-match-container">
+    console.log(props);
 
-        <MatchedUserImage userName={userName}/>
-        <NameAndInfo className="name-and-quick-information" userName={userName} position={position}/>
-        <FuncsAndBio className="functionalities-and-bio"/>
-        
-    </div>
-)
+    return(
+        <div className="single-match-container">
+
+            <MatchedUserImage userName={props.firstName}/>
+            <NameAndInfo className="name-and-quick-information" NameAndInfoProps={props}/>
+            <FuncsAndBio className="functionalities-and-bio" FuncsAndBioProps={props}/>
+            
+        </div>
+    )
+}
 
 export default SingleMatch;

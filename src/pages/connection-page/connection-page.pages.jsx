@@ -32,7 +32,8 @@ class ConnectionPage extends React.Component{
                         matchCount: response.profileCount,
                         userProfile: response.myProfile,
                         matchList: response.profileList,
-                    })
+                    });
+                    console.log(this.state.matchList[1].firstName);
                 }
             })
     }
@@ -41,7 +42,10 @@ class ConnectionPage extends React.Component{
         return (
             <div>
                 <ConnectionPageHeader userName={'alex-erwin'} myProfile={this.state.userProfile}/>
-                <MatchList profileList={this.state.profileList}/>
+                {this.state.matchList.length > 0 ? 
+                <MatchList matchListProps={this.state.matchList}/>
+                : <></>
+                }
             </div>
         );
     }

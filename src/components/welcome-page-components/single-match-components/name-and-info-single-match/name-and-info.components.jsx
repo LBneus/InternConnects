@@ -5,10 +5,10 @@ import QuickInfo from "./quick-info/quick-info.components";
 
 import "./name-and-info.styles.scss";
 
-const NameAndInfo = ({userName, position}) => (
+const NameAndInfo = ({NameAndInfoProps}) => (
     <div className="name-and-info">
-        <NameAndPosition userName={userName} position={position}/>
-        <QuickInfo/>
+        <NameAndPosition firstName={NameAndInfoProps.firstName} lastName={NameAndInfoProps.lastName} position={NameAndInfoProps.relocationPurpose}/>
+        <QuickInfo QuickInfoProps={NameAndInfoProps}/>
     </div>
 )
 
