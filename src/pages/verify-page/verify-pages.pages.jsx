@@ -70,10 +70,10 @@ class VerifyPage extends React.Component {
                            onChange={(e) => this.setEmailVal(e)}/>
                     <input type="password" className="user-password" placeholder={"Enter your password"}
                            onChange={(e) => this.setPasswordVal(e)}/>
-                    <input type="text" className="user-email" placeholder={"Enter the verification code"}
-                           onChange={(e) => this.setVerificationCode(e)}/>}
+                    <input type="text" className="user-verify" placeholder={"Enter the verification code"}
+                           onChange={(e) => this.setVerificationCode(e)}/>
 
-                    <button type="submit" className="log-in-button"
+                    <button type="submit" className="verify-button"
                             onClick={this.sendVerifyRequest}>Verify My Account</button>
 
                     {this.state.wasVerifyFail && <div>

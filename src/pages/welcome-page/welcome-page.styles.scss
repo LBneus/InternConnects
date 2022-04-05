@@ -5,39 +5,82 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
+
     margin-top: 15%;
+    font-size: 1em;
      
-    .user-email, .user-password{
-        width: 400px;
-        height: 40px;
+    // h1, h2, h3, h4, h5{
+    //     margin: 0.75%;
+    // }
+
+    .welcome-message {
+       text-align: center;
+       position: relative;
+       bottom: 2.0em;
+    
+    }
+
+    .access-information-message {
+      text-align: center;
+      position: relative;
+      bottom: 2.4em;
+      
+    }
+
+    // .accounts-profiles-container{
+    //     display: flex;
+    //     flex-direction: row;
+    //     flex-wrap: wrap;
+    //     margin-top: 40px;
+    //     margin-bottom: 20px;
+    // }
+
+    .log-in-button {
+        width: 100%;
+        position: sticky;
+        bottom: 100px;
+    }
+
+    .user-first-name {
+        width: 18em;
+        height: 5%;
         border-radius: 30px;
         margin-top: 30px;
         padding-left: 15px;
+        position: relative;
+        top: 60%;
         font-size: 20px;
         font-weight: bold;
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    .log-in-button{
-        width: 170px;
+    .user-last-name {
+        width: 18em;
+        height: 5%;
+        border-radius: 30px;
+        margin-top: 30px;
+        padding-left: 15px;
+        position: relative;
+        top: 60%;
+        font-size: 20px;
+        font-weight: bold;
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .welcome-page-signout-button{
+        width: 17px;
         height: 30px;
         border-radius: 20px;
-        margin-top: 20px;
+        margin-top: 10px;
         font-weight: bold;
     }
 
-    .switch-mode-button{
-        width: 200px;
-        height: 30px;
-        border-radius: 20px;
-        margin-top: 20px;
-    }
-
-    .log-in-button:hover{
+    .account-page-signout-button:hover{
         cursor: pointer;
     }
-
-}
-
-h1, h2, h3, h4, h5{
-    margin: 10px;
 }

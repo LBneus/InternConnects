@@ -5,24 +5,65 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 15%;
+    margin-top: 13.5%;
      
-    .user-email, .user-password{
-        width: 400px;
-        height: 40px;
+    .user-email {
+        width: 18em;
+        height: 5%;
+        border-radius: 30px;
+        //margin-top: 30px;
+        padding-left: 15px;
+        font-size: 20px;
+        position: relative;
+        bottom: 220%;
+        font-weight: bold;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        
+    }
+
+    .user-password{
+        width: 18em;
+        height: 5%;
         border-radius: 30px;
         margin-top: 30px;
         padding-left: 15px;
+        position: relative;
+        top: 50%;
         font-size: 20px;
         font-weight: bold;
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .user-verify {
+        width: 18em;
+        height: 5%;
+        border-radius: 30px;
+        margin-top: 30px;
+        padding-left: 15px;
+        position: relative;
+        top: 60%;
+        font-size: 20px;
+        font-weight: bold;
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .log-in-button{
-        width: 170px;
+        width: 200px;
         height: 30px;
         border-radius: 20px;
         margin-top: 20px;
-        font-weight: bold;
+        position: relative;
+        top: 0.5em;
+       // top: 7em; right: 25em;
+       display: block;
+       margin-left: auto;
+       margin-right: auto;
     }
 
     .switch-mode-button{
@@ -30,6 +71,25 @@
         height: 30px;
         border-radius: 20px;
         margin-top: 20px;
+        position: relative;
+        top: 50%;
+       // top: 7em; right: 25em;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .verify-button{
+        width: 200px;
+        height: 30px;
+        border-radius: 20px;
+        margin-top: 20px;
+        position: relative;
+        top: 70%;
+       // top: 7em; right: 25em;
+       display: block;
+       margin-left: auto;
+       margin-right: auto;
     }
 
     .log-in-button:hover{

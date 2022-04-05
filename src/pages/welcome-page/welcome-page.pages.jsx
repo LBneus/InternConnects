@@ -140,11 +140,11 @@ class WelcomePage extends React.Component {
                        onChange={(e) => this.setPasswordVal(e)}/>
 
                 {this.state.newAccount &&
-                    <input type="text" className="user-email" placeholder={"Enter your first name"}
+                    <input type="text" className="user-first-name" placeholder={"Enter your first name"}
                            onChange={(e) => this.setFirstName(e)}/>}
 
                 {this.state.newAccount &&
-                    <input type="text" className="user-email" placeholder={"Enter your last name"}
+                    <input type="text" className="user-last-name" placeholder={"Enter your last name"}
                            onChange={(e) => this.setLastName(e)}/>}
 
                 {this.state.blankField &&
