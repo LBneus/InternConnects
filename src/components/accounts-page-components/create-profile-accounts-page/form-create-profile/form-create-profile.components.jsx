@@ -44,9 +44,8 @@ class CreateProfileForm extends React.Component {
 
     sendCreateProfileRequest() {
 
-        let dMonth = this.NumberToMonth(this.state.departureMonth);
-        let aMonth = this.NumberToMonth(this.state.arrivalMonth)
-
+        let dMonth = this.NumberToMonth(parseInt(this.state.departureMonth));
+        let aMonth = this.NumberToMonth(parseInt(this.state.arrivalMonth));
 
         let rDay = (this.state.permanentRelocation ? '01' : this.state.departureDay);
         let rMonth = (this.state.permanentRelocation ? 'January' : dMonth);
