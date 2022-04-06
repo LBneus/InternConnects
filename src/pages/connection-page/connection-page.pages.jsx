@@ -41,7 +41,7 @@ class ConnectionPage extends React.Component{
     render() {
         return (
             <div>
-                <ConnectionPageHeader userName={'alex-erwin'} myProfile={this.state.userProfile}/>
+                <ConnectionPageHeader userName={'alex-erwin'} userProfileData={this.state.userProfile}/>
                 {this.state.matchList.length > 0 ? 
                 <MatchList matchListProps={this.state.matchList}/>
                 : <></>

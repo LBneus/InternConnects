@@ -1,20 +1,15 @@
 .location-input-container{
-    width: 100%;
+    border-radius: 30px;
+    padding: 4px;
+    font-size: 18px;
+    padding-left: 10px;
+    font-weight: bold;
+    color: black;
+    background-color: white;
+    height: auto;
 
-    .location-input{
-        width: 100%;
-        border-radius: 30px;
-        padding: 7px;
-
-
-    }
-
-    ::placeholder{
-        font-size: 18px;
-        padding-left: 4px;
-        font-weight: bold;
-        color: black;
-    }
+    display: flex;
+    align-items: center;
 }
 
 

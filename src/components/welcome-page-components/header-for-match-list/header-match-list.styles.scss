@@ -36,19 +36,18 @@
             align-items: center;
             justify-content: center;
 
-            .end-date{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
+            .internship-dates{
+                font-weight: bold;
+                color: black;
+                border-radius: 20px;
+                padding: 8px;
+                background-color: white;
+                font-size: 15px;
+                width: 50%;
                 justify-content: center;
-                margin-top: 17px;
-                input{
-                    margin-left: 35px;
-                }
-            }
-
-            .start-date input{
-                margin-left: 12px
+                align-items: center;
+                display: flex;
+                margin: 7px;
             }
             
         }

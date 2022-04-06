@@ -2,21 +2,14 @@ import React from "react";
 
 import ButtonMatchList from "../match-list/button-for-match-list/button-for-match-list.components";
 import LocationInput from "./location-input-info/location-input-info.components";
-import DateInput from "./date-input-info/date-input-info.components";
 import {Link} from "react-router-dom";
 
 import "./header-match-list.styles.scss";
 
-class ConnectionPageHeader extends React.Component {
+const ConnectionPageHeader = ({userProfileData}) => {
 
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-            userProfile: this.props.myProfile,
-        }
-    }
+        console.log(userProfileData);
 
-    render() {
         return (
             <div className="header-panel">
 
@@ -24,17 +17,17 @@ class ConnectionPageHeader extends React.Component {
 
                     <div className="logo-and-location">
                         <Link to='/' className="logo-name">InternConnects</Link>
-                        <LocationInput className="user-location" userLocation={'Seattle, WA'}/>
+                        <LocationInput className="user-location" userLocationData={userProfileData}/>
                     </div>
 
 
                     <div className="internship-period">
-                        <div className="start-date">
-                            <DateInput userDirection="From" userDateInfo={this.state.userProfile} className="start-date"/>
+                        <div className="internship-dates">
+                            {userProfileData.arrivalMonth} {userProfileData.arrivalDay}, {userProfileData.arrivalYear}
                         </div>
 
-                        <div className="end-date">
-                            <DateInput userDirection="To" userDateInfo={this.state.userProfile} className="end-date"/>
+                        <div className="internship-dates">
+                            {userProfileData.departureMonth} {userProfileData.departureDay}, {userProfileData.departureYear} 
                         </div>
                     </div>
 
@@ -61,7 +54,7 @@ class ConnectionPageHeader extends React.Component {
 
             </div>
         )
-    }
+
 }
 
 export default ConnectionPageHeader;
