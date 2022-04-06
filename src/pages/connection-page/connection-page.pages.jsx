@@ -33,7 +33,6 @@ class ConnectionPage extends React.Component{
                         userProfile: response.myProfile,
                         matchList: response.profileList,
                     });
-                    console.log(this.state.matchList[1].firstName);
                 }
             })
     }
