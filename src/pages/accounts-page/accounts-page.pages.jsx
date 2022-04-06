@@ -7,6 +7,7 @@ import { UUIDContext } from "../../UUIDContext";
 import "./accounts-page.styles.scss"
 import CreateProfileForm
     from "../../components/accounts-page-components/create-profile-accounts-page/form-create-profile/form-create-profile.components";
+import "./create-profile-accounts-page.styles.scss";
 
 class AccountsPage extends React.Component {
 
