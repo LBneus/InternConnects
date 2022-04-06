@@ -141,6 +141,8 @@ class CreateProfileForm extends React.Component {
                             <label for="user-grad-year">Graduation Year</label>
                             <br></br>
                             <label for="user-grad-season">Graduation Season</label>
+                            <br></br>
+                            <label for="user-profile-picture">Profile Picture</label>
                         </div>
 
                         <div className="user-details-info">
@@ -206,6 +208,11 @@ class CreateProfileForm extends React.Component {
                                 <input name="user-grad-season"
                                     onChange={(e) => this.setGradSeason(e)}/>
                             </div>
+
+                            <div>
+                                <input type="file" id="myFile" name="user-profile-picture"/>
+                            </div>
+
                         </div>
 
                         </div>
