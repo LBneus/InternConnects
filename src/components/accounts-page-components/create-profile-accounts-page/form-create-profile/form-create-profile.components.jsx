@@ -33,12 +33,23 @@ class CreateProfileForm extends React.Component {
             requestCompleted: false
         }
         this.sendCreateProfileRequest = this.sendCreateProfileRequest.bind(this);
+        this.NumberToMonth = this.NumberToMonth.bind(this);
+
+    }
+
+    NumberToMonth = (number) => {
+        const monthsVector = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        return monthsVector[number];
     }
 
     sendCreateProfileRequest() {
 
+        let dMonth = this.NumberToMonth(this.state.departureMonth);
+        let aMonth = this.NumberToMonth(this.state.arrivalMonth)
+
+
         let rDay = (this.state.permanentRelocation ? '01' : this.state.departureDay);
-        let rMonth = (this.state.permanentRelocation ? '01' : this.state.departureMonth);
+        let rMonth = (this.state.permanentRelocation ? 'January' : dMonth);
         let rYear = (this.state.permanentRelocation ? '3000' : this.state.departureYear);
 
         fetch(" https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/profiles", {
@@ -60,8 +71,8 @@ class CreateProfileForm extends React.Component {
                         gradSeason: this.state.gradSeason,
                         gradYear: this.state.gradYear,
 
-                        arrivalDay: parseInt(this.state.arrivalDay),
-                        arrivalMonth: this.state.arrivalMonth,
+                        arrivalDay: this.state.arrivalDay,
+                        arrivalMonth: aMonth,
                         arrivalYear: this.state.arrivalYear,
                         departureDay: rDay,
                         departureMonth: rMonth,
