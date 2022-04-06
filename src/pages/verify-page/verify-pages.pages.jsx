@@ -58,34 +58,42 @@ class VerifyPage extends React.Component {
         let submitRequestMsg = this.state.newAccount ? "Create Account" : "Log In";
 
         return (
-            <div className="welcome-page">
+            <div className="verify-page">
 
-                <h1 className="welcome-message">Welcome to InternConnects</h1>
-                {!(this.state.isVerify) && <div>
-                    <h3 className="access-information-message">
+                <h1 className="verify-message">Welcome to InternConnects</h1>
+                {!(this.state.isVerify) && <div className="inputs-container">
+                    <div className="access-information-message">
                         Please enter your email address, password, and verification code to verify your account.
-                    </h3>
+                    </div>
 
-                    <input type="email" className="user-email" placeholder={"Enter your email"}
+                    <div className="user-email-container">
+                        <input type="email" className="user-email" placeholder={"Enter your email"}
                            onChange={(e) => this.setEmailVal(e)}/>
-                    <input type="password" className="user-password" placeholder={"Enter your password"}
+                    </div>
+                    
+                    <div className="user-password-container">
+                        <input type="password" className="user-password" placeholder={"Enter your password"}
                            onChange={(e) => this.setPasswordVal(e)}/>
-                    <input type="text" className="user-email" placeholder={"Enter the verification code"}
-                           onChange={(e) => this.setVerificationCode(e)}/>}
+                    </div>
+
+                    <div className="verification-code-container">
+                        <input type="text" className="verification-code" placeholder={"Enter the verification code"}
+                           onChange={(e) => this.setVerificationCode(e)}/>
+                    </div>
 
                     <button type="submit" className="log-in-button"
                             onClick={this.sendVerifyRequest}>Verify My Account</button>
 
                     {this.state.wasVerifyFail && <div>
-                        <h3 className="access-information-message">We're sorry there was the following error in your
-                            verification request:</h3>
-                        <h3 className="access-information-message">{this.state.verifyFailMessage}</h3>
-                        <h3 className="access-information-message">Please try again.</h3>
+                        <div className="access-information-message">We're sorry there was the following error in your
+                            verification request:</div>
+                        <div className="access-information-message">{this.state.verifyFailMessage}</div>
+                        <div className="access-information-message">Please try again.</div>
                     </div>}
                 </div>}
-                {this.state.isVerify && <h3 className="access-information-message">
+                {this.state.isVerify && <div className="access-information-message">
                     Thank you for verifying you account. You may now log in.
-                </h3>}
+                </div>}
             </div>
         );
     }

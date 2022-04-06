@@ -1,13 +1,20 @@
-.welcome-page{
+.verify-page{
     color: white;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 15%;
+    margin-top: 13.5%;
+
+    .inputs-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
      
-    .user-email, .user-password{
+    .user-email, .user-password, .verification-code{
         width: 400px;
         height: 40px;
         border-radius: 30px;
@@ -15,6 +22,7 @@
         padding-left: 15px;
         font-size: 20px;
         font-weight: bold;
+        margin-top: 20px;
     }
 
     .log-in-button{
@@ -36,8 +44,4 @@
         cursor: pointer;
     }
 
-}
-
-h1, h2, h3, h4, h5{
-    margin: 10px;
 }
