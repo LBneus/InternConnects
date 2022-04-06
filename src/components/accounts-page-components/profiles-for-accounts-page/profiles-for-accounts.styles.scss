@@ -11,6 +11,10 @@
     margin-right: 30px;
     text-decoration: none;
 
+    .profile-container:last-child{
+        margin-right: 0px;
+    }
+
     .user-location{
         text-decoration: underline;
         font-size: 20px;

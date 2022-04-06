@@ -44,7 +44,7 @@ const ConnectionPageHeader = ({userProfileData}) => {
 
 
                     <Link to='/accountsPage' className="img-container">
-                        <img className="profile-image" src={`assets/profile-images/alex-erwin.jpg`}
+                        <img className="profile-image" src={`${userProfileData.photoPath}`}
                              alt='alex-erwin'/>
                     </Link>
 

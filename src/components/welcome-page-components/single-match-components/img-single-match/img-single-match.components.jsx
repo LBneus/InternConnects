@@ -2,10 +2,14 @@ import React from "react";
 
 import "./img-single-match.styles.scss";
 
-const MatchedUserImage = ({userName}) => (
-    <div className="img-container">
-        <img className="student-image" src={`assets/user-images/${userName}.jpg`} alt={userName}></img>
-    </div>
-)
+const MatchedUserImage = ({MatchedUserImageProps}) => {
+    console.log("HelloGoodPeople");
+    console.log(MatchedUserImageProps);
+    return(
+        <div className="img-container">
+            <img className="student-image" src={`${MatchedUserImageProps.photoPath}`} alt={MatchedUserImageProps.photoPath}></img>
+        </div>
+    )
+}
 
 export default MatchedUserImage;

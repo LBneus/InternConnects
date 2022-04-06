@@ -7,11 +7,6 @@ import "./functions-matched-user.styles.scss";
 const MatchedUserFunctions = () => (
     <div className="matched-user-functions-container">
 
-
-        <div className="more-details-cover">
-            <ButtonMatchList className="more-details-matched-user" ButtonName={"More Details"}/>
-        </div>
-
         <div className="contact-matched-cover">
             <ButtonMatchList className="contact-matched-user" ButtonName={"Contact"}/>
         </div>

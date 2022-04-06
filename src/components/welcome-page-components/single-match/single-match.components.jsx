@@ -10,8 +10,7 @@ const SingleMatch = (props)=> {
 
     return(
         <div className="single-match-container">
-
-            <MatchedUserImage userName={props.firstName}/>
+            <MatchedUserImage MatchedUserImageProps={props}/>
             <NameAndInfo className="name-and-quick-information" NameAndInfoProps={props}/>
             <FuncsAndBio className="functionalities-and-bio" FuncsAndBioProps={props}/>
             
