@@ -8,8 +8,6 @@ import "./single-match.styles.scss";
 
 const SingleMatch = (props)=> {
 
-    console.log(props);
-
     return(
         <div className="single-match-container">
 

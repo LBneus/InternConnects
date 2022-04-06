@@ -8,8 +8,6 @@ import "./header-match-list.styles.scss";
 
 const ConnectionPageHeader = ({userProfileData}) => {
 
-        console.log(userProfileData);
-
         return (
             <div className="header-panel">
 
