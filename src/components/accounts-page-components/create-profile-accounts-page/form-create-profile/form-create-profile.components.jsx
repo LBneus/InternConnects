@@ -2,33 +2,75 @@ import React from "react";
 
 import "./form-create-profile.styles.scss";
 
+import {UUIDContext} from "../../../../UUIDContext";
+
 class CreateProfileForm extends React.Component {
 
-    constructor(props){
-        super(props);
+    constructor(props, context) {
+        super(props, context);
         this.state = {
-                 city: '', 
-                 state: '', 
-                 arrivalDay: '',
-                 arrivalMonth: '',
-                 arrivalYear: '',
-                 permanentRelocation: '', 
-                 departureDay: '',
-                 departureMonth: '',
-                 departureYear: '',
+            city: '',
+            state: '',
+            arrivalDay: '',
+            arrivalMonth: '',
+            arrivalYear: '',
+            permanentRelocation: false,
+            departureDay: '',
+            departureMonth: '',
+            departureYear: '',
 
             // Additional details
-                 zipCode: '',
-                 relocationPurpose: '',
-                 userBio: '',
-                 hometown: '',
-                 university: '',
-                 majors: '',
-                 minors: '',
-                 gradSeason: '',
-                 gradYear: '',
-                 upidsOfConnectionRequests: ''
+            zipCode: '',
+            relocationPurpose: '',
+            userBio: '',
+            hometown: '',
+            university: '',
+            majors: '',
+            minors: '',
+            gradSeason: '',
+            gradYear: '',
+
+            requestCompleted: false
         }
+        this.sendCreateProfileRequest = this.sendCreateProfileRequest.bind(this);
+    }
+
+    sendCreateProfileRequest() {
+
+        let rDay = (this.state.permanentRelocation ? '01' : this.state.departureDay);
+        let rMonth = (this.state.permanentRelocation ? '01' : this.state.departureMonth);
+        let rYear = (this.state.permanentRelocation ? '3000' : this.state.departureYear);
+
+        fetch(" https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/profiles", {
+            "method": "POST",
+            "body": JSON.stringify({
+                IC_UUID: this.context.userUUID,
+                newProfile:
+                    {
+                        city: this.state.city,
+                        state: this.state.state,
+                        permanentRelocation: this.state.permanentRelocation,
+                        zipCode: this.state.zipCode,
+                        relocationPurpose: this.state.relocationPurpose,
+                        userBio: this.state.userBio,
+                        hometown: this.state.hometown,
+                        university: this.state.university,
+                        majors: this.state.majors,
+                        minors: this.state.minors,
+                        gradSeason: this.state.gradSeason,
+                        gradYear: this.state.gradYear,
+
+                        arrivalDay: parseInt(this.state.arrivalDay),
+                        arrivalMonth: this.state.arrivalMonth,
+                        arrivalYear: this.state.arrivalYear,
+                        departureDay: rDay,
+                        departureMonth: rMonth,
+                        departureYear: rYear,
+                        photoPath: "https://ic-profile-photos.s3.amazonaws.com/resume+photo.jpg"
+                    }
+            })
+        })
+            .then(response => response.json())
     }
 
     setCityVal = e => {
@@ -39,32 +81,24 @@ class CreateProfileForm extends React.Component {
         this.setState({state: e.currentTarget.value});
     }
 
-    setArrivalDay = e => {
-        this.setState({setArrivalDay: e.currentTarget.value});
+    setArrival = e => {
+        this.setState({
+            arrivalYear: e.currentTarget.value.toString().substring(0, 4),
+            arrivalMonth: e.currentTarget.value.toString().substring(5, 7),
+            arrivalDay: e.currentTarget.value.toString().substring(8, 10)
+        })
     }
 
-    setArrivalMonth = e => {
-        this.setState({arrivalMonth: e.currentTarget.value});
-    }
-
-    setArrivalYear = e => {
-        this.setState({arrivalYear: e.currentTarget.value});
+    setDeparture = e => {
+        this.setState({
+            departureYear: e.currentTarget.value.toString().substring(0, 4),
+            departureMonth: e.currentTarget.value.toString().substring(5, 7),
+            departureDay: e.currentTarget.value.toString().substring(8, 10)
+        })
     }
 
     setPermanentRelocation = e => {
-        this.setState({permanentRelocation: e.currentTarget.value});
-    }
-
-    setDepartureDay = e => {
-        this.setState({departureDay: e.currentTarget.value});
-    }
-
-    setDepartureMonth = e => {
-        this.setState({departureMonth: e.currentTarget.value});
-    }
-
-    setDepartureYear = e => {
-        this.setState({departureYear: e.currentTarget.value});
+        this.setState({permanentRelocation: !this.state.permanentRelocation});
     }
 
     setZipCode = e => {
@@ -78,7 +112,7 @@ class CreateProfileForm extends React.Component {
     setUserBio = e => {
         this.setState({userBio: e.currentTarget.value});
     }
-    
+
     setHometown = e => {
         this.setState({hometown: e.currentTarget.value});
     }
@@ -103,11 +137,7 @@ class CreateProfileForm extends React.Component {
         this.setState({gradYear: e.currentTarget.value});
     }
 
-    setUpidsOfConnectionRequests = e => {
-        this.setState({upidsOfConnectionRequests: e.currentTarget.value});
-    }
-
-    render(){
+    render() {
 
         return(
             <div className="create-profile-form-container">
@@ -116,97 +146,99 @@ class CreateProfileForm extends React.Component {
                     <div className="user-details">
 
                         <div className="user-details-labels">
-                            <label for="date-from">From</label>
-                            <br></br>
-                            <label for="date-to">To</label>
-                            <br></br>
-                            <label for="user-city">City</label>
-                            <br></br>
-                            <label for="user-state">State</label>
-                            <br></br>
-                            <label for="user-permanentRelocation">Permanent Relocation</label>
-                            <br></br>
-                            <label for="user-zipCode">Zip Code</label>
-                            <br></br>
-                            <label for="user-relocationPurpose">Relocation Purpose</label>
-                            <br></br>
-                            <label for="user-hometown">Hometown</label>
-                            <br></br>
-                            <label for="user-university">University</label>
-                            <br></br>
-                            <label for="user-major">Majors</label>
-                            <br></br>
-                            <label for="user-minor">Minors</label>
-                            <br></br>
-                            <label for="user-grad-year">Graduation Year</label>
-                            <br></br>
-                            <label for="user-grad-season">Graduation Season</label>
-                            <br></br>
-                            <label for="user-profile-picture">Profile Picture</label>
+                            <label htmlFor="date-from">From</label>
+                            <br/>
+                            <label htmlFor="date-to">To</label>
+                            <br/>
+                            <label htmlFor="user-city">City</label>
+                            <br/>
+                            <label htmlFor="user-state">State</label>
+                            <br/>
+                            <label htmlFor="user-permanentRelocation">Permanent Relocation</label>
+                            <br/>
+                            <label htmlFor="user-zipCode">Zip Code</label>
+                            <br/>
+                            <label htmlFor="user-relocationPurpose">Relocation Purpose</label>
+                            <br/>
+                            <label htmlFor="user-hometown">Hometown</label>
+                            <br/>
+                            <label htmlFor="user-university">University</label>
+                            <br/>
+                            <label htmlFor="user-major">Majors</label>
+                            <br/>
+                            <label htmlFor="user-minor">Minors</label>
+                            <br/>
+                            <label htmlFor="user-grad-year">Graduation Year</label>
+                            <br/>
+                            <label htmlFor="user-grad-season">Graduation Season</label>
+                            <br/>
+                            <label htmlFor="user-profile-picture">Profile Picture</label>
                         </div>
 
                         <div className="user-details-info">
                             <div className="user-date-from">
-                                <input name="date" type="date"></input>
+                                <input name="date" type="date"
+                                       onChange={(e) => this.setArrival(e)}/>
                             </div>
 
                             <div className="user-date-to">
-                                <input name="to" type="date"></input>
+                                <input name="to" type="date"
+                                       onChange={(e) => this.setDeparture(e)}/>
                             </div>
 
                             <div className="user-city">
                                 <input name="user-city"
-                                    onChange={(e) => this.setCityVal(e)}/>
+                                       onChange={(e) => this.setCityVal(e)}/>
                             </div>
 
                             <div className="user-state">
                                 <input name="user-state"
-                                    onChange={(e) => this.setStateVal(e)}/>
+                                       onChange={(e) => this.setStateVal(e)}/>
                             </div>
 
                             <div className="user-permanentRelocation">
                                 <input name="user-permanentRelocation" type="checkbox"
-                                    onChange={(e) => this.setPermanentRelocation(e)}/>
+                                       onChange={(e) => this.setPermanentRelocation(e)}/>
                             </div>
 
                             <div className="user-zipCode">
                                 <input name="user-zipCode"
-                                    onChange={(e) => this.setZipCode(e)}/>
+                                       onChange={(e) => this.setZipCode(e)}/>
                             </div>
 
                             <div className="user-relocationPurpose">
                                 <input name="user-relocationPurpose"
-                                    onChange={(e) => this.setRelocationPurpose(e)}/>
+                                       onChange={(e) => this.setRelocationPurpose(e)}/>
                             </div>
 
                             <div className="user-hometown">
                                 <input name="user-hometown"
-                                    onChange={(e) => this.setHometown(e)}/>
+                                       onChange={(e) => this.setHometown(e)}/>
                             </div>
 
                             <div className="user-university">
                                 <input name="university" id="university"
-                                    onChange={(e) => this.setUniversity(e)}/>    
+                                       onChange={(e) => this.setUniversity(e)}/>
                             </div>
 
                             <div className="user-major">
                                 <input name="user-major"
-                                    onChange={(e) => this.setMajors(e)}/>
+                                       onChange={(e) => this.setMajors(e)}/>
                             </div>
 
                             <div className="user-minor">
                                 <input name="user-minor"
-                                    onChange={(e) => this.setMinors(e)}/>
+                                       onChange={(e) => this.setMinors(e)}/>
                             </div>
 
                             <div className="user-grad-year">
                                 <input name="user-grad-year"
-                                    onChange={(e) => this.setGradYear(e)}/>
+                                       onChange={(e) => this.setGradYear(e)}/>
                             </div>
 
                             <div className="user-grad-season">
                                 <input name="user-grad-season"
-                                    onChange={(e) => this.setGradSeason(e)}/>
+                                       onChange={(e) => this.setGradSeason(e)}/>
                             </div>
 
                             <div>
@@ -215,30 +247,31 @@ class CreateProfileForm extends React.Component {
 
                         </div>
 
+                    </div>
+
+                    <div className="user-about-and-priorities">
+
+                        <div className="user-about">
+                            <label>About You</label>
+                            <br></br>
+                            <input className="user-about-input"
+                                   onChange={(e) => this.setUserBio(e)}/>
                         </div>
 
-                        <div className="user-about-and-priorities">
-
-                            <div className="user-about">
-                                <label>About You</label>
-                                <br></br>
-                                <input className="user-about-input"></input>
-                            </div>
-
-                            {/*<div className="user-priorities">
+                        {/*<div className="user-priorities">
                                 <label>Your Priorities</label>
                                 <br></br>
                                 <input className="user-about-input"></input>
                             </div>*/}
 
-                        </div>
-                    
                     </div>
-
-                <button className="submit-create-form-button">Submit</button>
+                </div>
+                <button className="submit-create-form-button" onClick={this.sendCreateProfileRequest}>Submit</button>
             </div>
         )
     }
 }
+
+CreateProfileForm.contextType = UUIDContext;
 
 export default CreateProfileForm;

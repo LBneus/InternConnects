@@ -1,11 +1,12 @@
 import React from "react";
 import ProfileForAccountsPage from "../../components/accounts-page-components/profiles-for-accounts-page/profiles-for-accounts.components";
-import CreateProfileAccounts from "../../components/accounts-page-components/create-profile-accounts-page/create-profile-accounts-page.components";
 
 import {Link, Redirect} from "react-router-dom";
 
 import { UUIDContext } from "../../UUIDContext";
 import "./accounts-page.styles.scss"
+import CreateProfileForm
+    from "../../components/accounts-page-components/create-profile-accounts-page/form-create-profile/form-create-profile.components";
 
 class AccountsPage extends React.Component {
 
@@ -15,20 +16,7 @@ class AccountsPage extends React.Component {
         })
         let uuid = this.context.userUUID;
         if (uuid !== '') {
-            fetch("https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/homepage", {
-                "method": "GET",
-                "headers": {IC_UUID: this.context.userUUID}
-            })
-                .then(response => response.json())
-                .then(response => {
-                    if (response.success) {
-                        this.setState({
-                            firstName: response.userName,
-                            profileCount: response.numUPIDs,
-                            profileList: response.associatedProfileList,
-                        })
-                    }
-                })
+            this.fetchPageInfo()
         }
     }
 
@@ -36,21 +24,55 @@ class AccountsPage extends React.Component {
         super(props, context);
         this.state = {
             firstName: '',
-            ic_uuid: this.context.uuid,
+            ic_uuid: this.context.userUUID,
             profileCount: 0,
-            profileList: []
+            profileList: [],
+            createProfileModal: false
         }
         this.signOutOfAccount = this.signOutOfAccount.bind(this);
+        this.fetchPageInfo = this.fetchPageInfo.bind(this);
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+    }
+
+    fetchPageInfo() {
+        fetch("https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/homepage", {
+            "method": "GET",
+            "headers": {IC_UUID: this.context.userUUID}
+        })
+            .then(response => response.json())
+            .then(response => {
+                if (response.success) {
+                    this.setState({
+                        firstName: response.userName,
+                        profileCount: response.numUPIDs,
+                        profileList: response.associatedProfileList,
+                    })
+                }
+            })
     }
 
     signOutOfAccount() {
         this.context.setUserUUID({userUUID: ''})
     }
 
+    openModal() {
+        this.setState({
+            createProfileModal: true
+        })
+    }
+
+    closeModal() {
+        this.setState({
+            createProfileModal: false
+        })
+        this.fetchPageInfo();
+    }
+
     render() {
         let uuid = this.context.userUUID;
         if (uuid.toString() === '') {
-            return(
+            return (
                 <Redirect to={"/"}/>
             )
         }
@@ -80,7 +102,23 @@ class AccountsPage extends React.Component {
                         <ProfileForAccountsPage profile={this.state.profileList[2]}
                                                 className="already-created-profile"/>}
                     {(this.state.profileCount < 3) &&
-                        <CreateProfileAccounts className="create-new-profile"/>}
+                        <div className="create-new-profile">
+                            <div className="create-profile-container">
+                                <div className="create-profile-message">Create Another Profile</div>
+                                <div className="create-profile-sign-container">
+                                    <img className="create-profile-sign" src={`/assets/icon-images/plus.png`}
+                                         alt="plus-sign"
+                                         onClick={this.openModal}/>
+                                </div>
+                                {(this.state.createProfileModal === true) &&
+                                    <div className="create-profile-pop-up-container">
+                                        <div className="create-profile-pop-up-content">
+                                            <button className="close-popup-btn" onClick={this.closeModal}>close</button>
+                                            <CreateProfileForm/>
+                                        </div>
+                                    </div>}
+                            </div>
+                        </div>}
                 </div>
 
                 <h6 className="listing-message">(select profile to view listings)</h6>

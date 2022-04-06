@@ -14,7 +14,7 @@ function CreateProfileAccounts() {
     return (<div className="create-profile-container">
         <div className="create-profile-message">Create Another Profile</div>
         <div className="create-profile-sign-container">
-            <img className="create-profile-sign" src={`/assets/icon-images/plus.png`} alt="plus-sign" onClick={() => setButtonPopup(true)}></img>
+            <img className="create-profile-sign" src={`/assets/icon-images/plus.png`} alt="plus-sign" onClick={() => setButtonPopup(true)}/>
         </div>
         <PopUp trigger = {buttonPopup} setTrigger = {setButtonPopup}>
             <CreateProfileForm/>
