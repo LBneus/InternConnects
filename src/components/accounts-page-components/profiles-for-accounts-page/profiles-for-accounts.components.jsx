@@ -10,6 +10,7 @@ class ProfileForAccountsPage extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.setGlobalUPID = this.setGlobalUPID.bind(this);
+        this.deleteProfile = this.deleteProfile.bind(this);
     }
 
     setGlobalUPID () {
@@ -17,17 +18,34 @@ class ProfileForAccountsPage extends React.Component {
         this.context.setSelectedUPID({selectedUPID: p.upid})
     }
 
+    deleteProfile(){
+        // const p = this.props.profile;
+
+        // fetch("https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/profiles", {
+        //     "method": "DELETE",
+        //     "body": {
+        //         "ic_UUID": this.context.userUUID,
+        //         "upid": p.upid 
+        //     }
+        // })
+        //     .then(response => response.json())
+        //     .then(response => {
+        //     })
+    }
+
     render() {
         const p = this.props.profile;
         return (
-            <Link to="/connectionPage"
-                  onClick={this.setGlobalUPID}
-                  className="profile-container">
-                <div className="user-location">{p.city}, {p.state}</div>
-                <div className="start-date">{p.arrivalMonth} {p.arrivalDay}, {p.arrivalYear}</div>
-                <div className="date-to">to</div>
-                <div className="end-date">{p.departureMonth} {p.departureDay}, {p.departureYear}</div>
-            </Link>
+            <div className="profile-container">
+                <Link className="user-info-container" to="/connectionPage"
+                onClick={this.setGlobalUPID}>
+                    <div className="user-location">{p.city}, {p.state}</div>
+                    <div className="start-date">{p.arrivalMonth} {p.arrivalDay}, {p.arrivalYear}</div>
+                    <div className="date-to">to</div>
+                    <div className="end-date">{p.departureMonth} {p.departureDay}, {p.departureYear}</div>
+                </Link>
+                <div className="remove-button-for-profile" onClick={this.deleteProfile}>(remove)</div>
+            </div>
         )
     }
 }
