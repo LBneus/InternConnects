@@ -30,7 +30,7 @@ class CreateProfileForm extends React.Component {
             gradSeason: '',
             gradYear: '',
 
-            requestCompleted: false
+            requestSuccess: false
         }
         this.sendCreateProfileRequest = this.sendCreateProfileRequest.bind(this);
         this.NumberToMonth = this.NumberToMonth.bind(this);
@@ -80,7 +80,7 @@ class CreateProfileForm extends React.Component {
                     }
             })
         })
-            .then(response => response.json())
+            .then(response => {this.setState({requestSuccess: true})})
     }
 
     setCityVal = e => {
@@ -148,137 +148,146 @@ class CreateProfileForm extends React.Component {
     }
 
     render() {
+        if (this.state.requestSuccess) {
+            return (
+                <div align='center'>
+                    <h1>Thank you for creating an InternConnects profile.</h1>
+                    <h1>You may now close this window.</h1>
+                </div>
+            )
+        } else {
+            return (
+                <div className="create-profile-form-container">
+                    <div className="create-profile-form-content">
 
-        return(
-            <div className="create-profile-form-container">
-                <div className="create-profile-form-content">
+                        <div className="user-details">
 
-                    <div className="user-details">
+                            <div className="user-details-labels">
+                                <label htmlFor="date-from">From</label>
+                                <br/>
+                                <label htmlFor="date-to">To</label>
+                                <br/>
+                                <label htmlFor="user-city">City</label>
+                                <br/>
+                                <label htmlFor="user-state">State</label>
+                                <br/>
+                                <label htmlFor="user-permanentRelocation">Permanent Relocation</label>
+                                <br/>
+                                <label htmlFor="user-zipCode">Zip Code</label>
+                                <br/>
+                                <label htmlFor="user-relocationPurpose">Relocation Purpose</label>
+                                <br/>
+                                <label htmlFor="user-hometown">Hometown</label>
+                                <br/>
+                                <label htmlFor="user-university">University</label>
+                                <br/>
+                                <label htmlFor="user-major">Majors</label>
+                                <br/>
+                                <label htmlFor="user-minor">Minors</label>
+                                <br/>
+                                <label htmlFor="user-grad-year">Graduation Year</label>
+                                <br/>
+                                <label htmlFor="user-grad-season">Graduation Season</label>
+                                <br/>
+                                <label htmlFor="user-profile-picture">Profile Picture</label>
+                            </div>
 
-                        <div className="user-details-labels">
-                            <label htmlFor="date-from">From</label>
-                            <br/>
-                            <label htmlFor="date-to">To</label>
-                            <br/>
-                            <label htmlFor="user-city">City</label>
-                            <br/>
-                            <label htmlFor="user-state">State</label>
-                            <br/>
-                            <label htmlFor="user-permanentRelocation">Permanent Relocation</label>
-                            <br/>
-                            <label htmlFor="user-zipCode">Zip Code</label>
-                            <br/>
-                            <label htmlFor="user-relocationPurpose">Relocation Purpose</label>
-                            <br/>
-                            <label htmlFor="user-hometown">Hometown</label>
-                            <br/>
-                            <label htmlFor="user-university">University</label>
-                            <br/>
-                            <label htmlFor="user-major">Majors</label>
-                            <br/>
-                            <label htmlFor="user-minor">Minors</label>
-                            <br/>
-                            <label htmlFor="user-grad-year">Graduation Year</label>
-                            <br/>
-                            <label htmlFor="user-grad-season">Graduation Season</label>
-                            <br/>
-                            <label htmlFor="user-profile-picture">Profile Picture</label>
+                            <div className="user-details-info">
+                                <div className="user-date-from">
+                                    <input name="date" type="date"
+                                           onChange={(e) => this.setArrival(e)}/>
+                                </div>
+
+                                <div className="user-date-to">
+                                    <input name="to" type="date"
+                                           onChange={(e) => this.setDeparture(e)}/>
+                                </div>
+
+                                <div className="user-city">
+                                    <input name="user-city"
+                                           onChange={(e) => this.setCityVal(e)}/>
+                                </div>
+
+                                <div className="user-state">
+                                    <input name="user-state"
+                                           onChange={(e) => this.setStateVal(e)}/>
+                                </div>
+
+                                <div className="user-permanentRelocation">
+                                    <input name="user-permanentRelocation" type="checkbox"
+                                           onChange={(e) => this.setPermanentRelocation(e)}/>
+                                </div>
+
+                                <div className="user-zipCode">
+                                    <input name="user-zipCode"
+                                           onChange={(e) => this.setZipCode(e)}/>
+                                </div>
+
+                                <div className="user-relocationPurpose">
+                                    <input name="user-relocationPurpose"
+                                           onChange={(e) => this.setRelocationPurpose(e)}/>
+                                </div>
+
+                                <div className="user-hometown">
+                                    <input name="user-hometown"
+                                           onChange={(e) => this.setHometown(e)}/>
+                                </div>
+
+                                <div className="user-university">
+                                    <input name="university" id="university"
+                                           onChange={(e) => this.setUniversity(e)}/>
+                                </div>
+
+                                <div className="user-major">
+                                    <input name="user-major"
+                                           onChange={(e) => this.setMajors(e)}/>
+                                </div>
+
+                                <div className="user-minor">
+                                    <input name="user-minor"
+                                           onChange={(e) => this.setMinors(e)}/>
+                                </div>
+
+                                <div className="user-grad-year">
+                                    <input name="user-grad-year"
+                                           onChange={(e) => this.setGradYear(e)}/>
+                                </div>
+
+                                <div className="user-grad-season">
+                                    <input name="user-grad-season"
+                                           onChange={(e) => this.setGradSeason(e)}/>
+                                </div>
+
+                                <div>
+                                    <input type="file" id="myFile" name="user-profile-picture"/>
+                                </div>
+
+                            </div>
+
                         </div>
 
-                        <div className="user-details-info">
-                            <div className="user-date-from">
-                                <input name="date" type="date"
-                                       onChange={(e) => this.setArrival(e)}/>
+                        <div className="user-about-and-priorities">
+
+                            <div className="user-about">
+                                <label>About You</label>
+                                <br></br>
+                                <input className="user-about-input"
+                                       onChange={(e) => this.setUserBio(e)}/>
                             </div>
 
-                            <div className="user-date-to">
-                                <input name="to" type="date"
-                                       onChange={(e) => this.setDeparture(e)}/>
-                            </div>
-
-                            <div className="user-city">
-                                <input name="user-city"
-                                       onChange={(e) => this.setCityVal(e)}/>
-                            </div>
-
-                            <div className="user-state">
-                                <input name="user-state"
-                                       onChange={(e) => this.setStateVal(e)}/>
-                            </div>
-
-                            <div className="user-permanentRelocation">
-                                <input name="user-permanentRelocation" type="checkbox"
-                                       onChange={(e) => this.setPermanentRelocation(e)}/>
-                            </div>
-
-                            <div className="user-zipCode">
-                                <input name="user-zipCode"
-                                       onChange={(e) => this.setZipCode(e)}/>
-                            </div>
-
-                            <div className="user-relocationPurpose">
-                                <input name="user-relocationPurpose"
-                                       onChange={(e) => this.setRelocationPurpose(e)}/>
-                            </div>
-
-                            <div className="user-hometown">
-                                <input name="user-hometown"
-                                       onChange={(e) => this.setHometown(e)}/>
-                            </div>
-
-                            <div className="user-university">
-                                <input name="university" id="university"
-                                       onChange={(e) => this.setUniversity(e)}/>
-                            </div>
-
-                            <div className="user-major">
-                                <input name="user-major"
-                                       onChange={(e) => this.setMajors(e)}/>
-                            </div>
-
-                            <div className="user-minor">
-                                <input name="user-minor"
-                                       onChange={(e) => this.setMinors(e)}/>
-                            </div>
-
-                            <div className="user-grad-year">
-                                <input name="user-grad-year"
-                                       onChange={(e) => this.setGradYear(e)}/>
-                            </div>
-
-                            <div className="user-grad-season">
-                                <input name="user-grad-season"
-                                       onChange={(e) => this.setGradSeason(e)}/>
-                            </div>
-
-                            <div>
-                                <input type="file" id="myFile" name="user-profile-picture"/>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div className="user-about-and-priorities">
-
-                        <div className="user-about">
-                            <label>About You</label>
-                            <br></br>
-                            <input className="user-about-input"
-                                   onChange={(e) => this.setUserBio(e)}/>
-                        </div>
-
-                        {/*<div className="user-priorities">
+                            {/*<div className="user-priorities">
                                 <label>Your Priorities</label>
                                 <br></br>
                                 <input className="user-about-input"></input>
                             </div>*/}
 
+                        </div>
                     </div>
+                    <button className="submit-create-form-button" onClick={this.sendCreateProfileRequest}>Submit
+                    </button>
                 </div>
-                <button className="submit-create-form-button" onClick={this.sendCreateProfileRequest}>Submit</button>
-            </div>
-        )
+            )
+        }
     }
 }
 
