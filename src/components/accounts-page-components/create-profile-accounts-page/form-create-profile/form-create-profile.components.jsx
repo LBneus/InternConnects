@@ -30,11 +30,12 @@ class CreateProfileForm extends React.Component {
             gradSeason: '',
             gradYear: '',
 
+            userPhotoPath: '',
             requestSuccess: false
         }
         this.sendCreateProfileRequest = this.sendCreateProfileRequest.bind(this);
         this.NumberToMonth = this.NumberToMonth.bind(this);
-
+        this.uploadToS3 = this.uploadToS3.bind(this);
     }
 
     NumberToMonth = (number) => {
@@ -76,7 +77,7 @@ class CreateProfileForm extends React.Component {
                         departureDay: rDay,
                         departureMonth: rMonth,
                         departureYear: rYear,
-                        photoPath: "https://ic-profile-photos.s3.amazonaws.com/resume+photo.jpg"
+                        photoPath: this.state.userPhotoPath
                     }
             })
         })
@@ -145,6 +146,15 @@ class CreateProfileForm extends React.Component {
 
     setGradYear = e => {
         this.setState({gradYear: e.currentTarget.value});
+    }
+
+    uploadToS3 = e => {
+        const image = e.target.files[0];
+        let reader = new FileReader();
+        reader.onloadend = () => {
+            this.setState({userPhotoPath: reader.result})
+        }
+        reader.readAsDataURL(image);
     }
 
     render() {
@@ -259,7 +269,9 @@ class CreateProfileForm extends React.Component {
                                 </div>
 
                                 <div>
-                                    <input type="file" id="myFile" name="user-profile-picture"/>
+                                    <input type="file" id="myFile" name="user-profile-picture"
+                                           accept="image/png, image/jpeg"
+                                           onChange={(e) => this.uploadToS3(e)}/>
                                 </div>
 
                             </div>
@@ -270,7 +282,7 @@ class CreateProfileForm extends React.Component {
 
                             <div className="user-about">
                                 <label>About You</label>
-                                <br></br>
+                                <br/>
                                 <input className="user-about-input"
                                        onChange={(e) => this.setUserBio(e)}/>
                             </div>

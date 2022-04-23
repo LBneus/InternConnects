@@ -48,17 +48,18 @@ class WelcomePage extends React.Component {
 
     toggleAccountCreate() {
         if (this.state.newAccount === true) {
-            this.setState({ blankField: false });
+            this.setState({blankField: false});
         }
         this.setState({newAccount: !this.state.newAccount});
     }
 
     sendLoginRequest() {
+        this.setState({loading: true})
         if ((this.state.email === '') || (this.state.password === '')) {
-            this.setState({ blankField: true });
+            this.setState({blankField: true});
 
         } else if (!(this.state.email.toString().endsWith('.edu'))) {
-            this.setState({ nonEduEmail: true });
+            this.setState({nonEduEmail: true});
 
         } else {
             this.setState({loading: true, signInFail: false});
@@ -68,6 +69,7 @@ class WelcomePage extends React.Component {
             })
                 .then(response => response.json())
                 .then(response => {
+                    this.setState({loading: false})
                     if (response.success) {
                         this.setState({
                             userUUID: response.IC_UUID,
@@ -81,6 +83,7 @@ class WelcomePage extends React.Component {
                     }
                 })
                 .catch(err => {
+                    this.setState({loading: false})
                     console.log(err)
                 })
         }

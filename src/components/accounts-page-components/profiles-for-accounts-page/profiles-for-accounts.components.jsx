@@ -19,18 +19,19 @@ class ProfileForAccountsPage extends React.Component {
     }
 
     deleteProfile(){
-        // const p = this.props.profile;
+        const p = this.props.profile;
 
-        // fetch("https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/profiles", {
-        //     "method": "DELETE",
-        //     "body": {
-        //         "ic_UUID": this.context.userUUID,
-        //         "upid": p.upid 
-        //     }
-        // })
-        //     .then(response => response.json())
-        //     .then(response => {
-        //     })
+        fetch("https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/profiles", {
+            "method": "DELETE",
+            "body": JSON.stringify({
+                "ic_UUID": this.context.userUUID,
+                "upid": p.upid
+            })
+        })
+            .then(response => response.json())
+            .then(response => {
+                this.forceUpdate();
+            })
     }
 
     render() {

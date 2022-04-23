@@ -28,7 +28,8 @@ class AccountsPage extends React.Component {
             ic_uuid: this.context.userUUID,
             profileCount: 0,
             profileList: [],
-            createProfileModal: false
+            createProfileModal: false,
+            loading: true
         }
         this.signOutOfAccount = this.signOutOfAccount.bind(this);
         this.fetchPageInfo = this.fetchPageInfo.bind(this);
@@ -48,6 +49,7 @@ class AccountsPage extends React.Component {
                         firstName: response.userName,
                         profileCount: response.numUPIDs,
                         profileList: response.associatedProfileList,
+                        loading: false
                     })
                 }
             })
@@ -78,21 +80,8 @@ class AccountsPage extends React.Component {
             )
         }
 
-        return (
-            <div className="accounts-page">
-                <h1 className="accounts-welcome-message">Welcome to InternConnects!</h1>
-                <h5 className="account-information-message">
-                    You are signed in as:
-                </h5>
-                <h5 className="account-information-email">
-                    {this.state.firstName}
-                </h5>
-
-                <Link to="/">
-                    <button className="account-page-signout-button" onClick={this.signOutOfAccount}>Sign Out</button>
-                </Link>
-
-                <div className="accounts-profiles-container">
+        let accounts = this.state.loading ? <div className="account-information-message"><br/>Loading...</div> :
+            <div className="accounts-profiles-container">
                     {(this.state.profileCount > 0) &&
                         <ProfileForAccountsPage profile={this.state.profileList[0]}
                                                 className="already-created-profile"/>}
@@ -121,6 +110,22 @@ class AccountsPage extends React.Component {
                             </div>
                         </div>}
                 </div>
+
+        return (
+            <div className="accounts-page">
+                <h1 className="accounts-welcome-message">Welcome to InternConnects!</h1>
+                <h5 className="account-information-message">
+                    You are signed in as:
+                </h5>
+                <h5 className="account-information-email">
+                    {this.state.firstName}
+                </h5>
+
+                <Link to="/">
+                    <button className="account-page-signout-button" onClick={this.signOutOfAccount}>Sign Out</button>
+                </Link>
+
+                {accounts}
 
                 <h6 className="listing-message">(select profile to view listings)</h6>
             </div>

@@ -12,8 +12,7 @@ const SingleMatch = (props)=> {
         <div className="single-match-container">
             <MatchedUserImage MatchedUserImageProps={props}/>
             <NameAndInfo className="name-and-quick-information" NameAndInfoProps={props}/>
-            <FuncsAndBio className="functionalities-and-bio" FuncsAndBioProps={props}/>
-            
+            <FuncsAndBio className="functionalities-and-bio" FuncsAndBioProps={props} sl={props.sl} rl={props.rl} al={props.al} dl={props.dl} id={props.id}/>
         </div>
     )
 }

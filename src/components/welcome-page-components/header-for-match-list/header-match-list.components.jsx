@@ -32,20 +32,20 @@ const ConnectionPageHeader = ({userProfileData}) => {
 
                     <div className="header-functionalities-container">
 
-                        <div className="sort-results">
-                            <ButtonMatchList ButtonName={"Sort Results"}/>
-                        </div>
+                        {/*<div className="sort-results">*/}
+                        {/*    <ButtonMatchList ButtonName={"Sort Results"}/>*/}
+                        {/*</div>*/}
 
-                        <div className="user-profile-access">
-                            <ButtonMatchList ButtonName={"My Information"}/>
-                        </div>
+                        {/*<div className="user-profile-access">*/}
+                        {/*    <ButtonMatchList ButtonName={"My Information"}/>*/}
+                        {/*</div>*/}
 
                     </div>
 
 
                     <Link to='/accountsPage' className="img-container">
                         <img className="profile-image" src={`${userProfileData.photoPath}`}
-                             alt='alex-erwin'/>
+                             alt='intern-connects'/>
                     </Link>
 
                 </div>

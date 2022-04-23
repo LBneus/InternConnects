@@ -15,9 +15,15 @@ class ConnectionPage extends React.Component{
             matchList: [],
             userProfile: Object,
 
+            connectionsSent: [],
+            connectionsReceived: [],
+            connectionsAccepted: [],
+            connectionsDenied: [],
+
             location: '',
             arrivalDate: '',
-            departureDate: ''
+            departureDate: '',
+            wait: true
         };
         this.fetchDataForPage = this.fetchDataForPage.bind(this)
     }
@@ -41,6 +47,32 @@ class ConnectionPage extends React.Component{
                     });
                 }
             })
+        fetch("https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/connect", {
+            "method": "GET",
+            "headers": {IC_UUID: this.context.userUUID, IC_UPID: this.context.selectedUPID }
+        })
+            .then(response => response.json())
+            .then(response => {
+                if (response.success) {
+
+                    let sConns = new Map(Object.entries(response.outstandingSentConns));
+                    let rConns = new Map(Object.entries(response.outstandingReceivedConns));
+                    let aConns = new Map(Object.entries(response.acceptedConns));
+                    let dConns = new Map(Object.entries(response.deniedConns));
+                    console.log(sConns);
+                    console.log(rConns);
+                    console.log(aConns);
+                    console.log(dConns);
+
+                    this.setState({
+                        connectionsSent: sConns,
+                        connectionsReceived: rConns,
+                        connectionsAccepted: aConns,
+                        connectionsDenied: dConns
+                    })
+                    this.setState({wait: false});
+                }
+            })
     }
 
     render() {
@@ -59,11 +91,19 @@ class ConnectionPage extends React.Component{
             )
         }
 
+        if (this.state.wait) {
+            return (<div>Loading</div>)
+        }
+
         return (
             <div>
-                <ConnectionPageHeader userName={'alex-erwin'} userProfileData={this.state.userProfile}/>
+                <ConnectionPageHeader userName={'intern-connects'} userProfileData={this.state.userProfile}/>
                 {this.state.matchList.length > 0 ? 
-                <MatchList matchListProps={this.state.matchList}/>
+                <MatchList matchListProps={this.state.matchList}
+                           sentConnList={this.state.connectionsSent}
+                           receivedConnList={this.state.connectionsReceived}
+                           acceptedConnList={this.state.connectionsAccepted}
+                           deniedConnList={this.state.connectionsDenied}/>
                 : <></>
                 }
             </div>
