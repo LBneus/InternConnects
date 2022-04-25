@@ -43,7 +43,7 @@ const ConnectionPageHeader = ({userProfileData, userConnectionsReceived}) => {
                         {/*    <ButtonMatchList ButtonName={"My Information"}/>*/}
                         {/*</div>*/}
 
-                        <NotificationButton notificationsReceivedData = {requestsReceived}/>
+                        {/*<NotificationButton notificationsReceivedData = {requestsReceived}/>*/}
 
                     </div>
 

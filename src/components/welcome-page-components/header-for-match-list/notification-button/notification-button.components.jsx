@@ -21,8 +21,7 @@ const NotificationButton = ({notificationsReceivedData}) => {
                 <div className='all-notifications-container'>
                 {notificationsReceivedData
                     .map((RequestUserId) => (
-                    <SignleNotification key={RequestUserId} RequestUserId={RequestUserId}
-                                 />
+                    <SignleNotification key={RequestUserId} RequestUserId={RequestUserId}/>
                     ))}
                 </div>
             </div>
