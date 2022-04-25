@@ -31,7 +31,8 @@ class CreateProfileForm extends React.Component {
             gradYear: '',
 
             userPhotoPath: '',
-            requestSuccess: false
+            requestSuccess: false,
+            requestInProgress: false
         }
         this.sendCreateProfileRequest = this.sendCreateProfileRequest.bind(this);
         this.NumberToMonth = this.NumberToMonth.bind(this);
@@ -51,6 +52,8 @@ class CreateProfileForm extends React.Component {
         let rDay = (this.state.permanentRelocation ? '01' : this.state.departureDay);
         let rMonth = (this.state.permanentRelocation ? 'January' : dMonth);
         let rYear = (this.state.permanentRelocation ? '3000' : this.state.departureYear);
+
+        this.setState({requestInProgress: true})
 
         fetch(" https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/profiles", {
             "method": "POST",
@@ -81,7 +84,7 @@ class CreateProfileForm extends React.Component {
                     }
             })
         })
-            .then(response => {this.setState({requestSuccess: true})})
+            .then(response => {this.setState({requestSuccess: true, requestInProgress: false})})
     }
 
     setCityVal = e => {
@@ -162,7 +165,14 @@ class CreateProfileForm extends React.Component {
             return (
                 <div align='center'>
                     <h1>Thank you for creating an InternConnects profile.</h1>
-                    <h1>You may now close this window.</h1>
+                    <h2>You may now close this window.</h2>
+                </div>
+            )
+        } else if (this.state.requestInProgress) {
+            return (
+                <div align='center'>
+                    <h1>Please wait, your request is being processed.</h1>
+                    <h2>Do not close this window.</h2>
                 </div>
             )
         } else {
