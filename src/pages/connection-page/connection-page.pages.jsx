@@ -59,10 +59,6 @@ class ConnectionPage extends React.Component{
                     let rConns = new Map(Object.entries(response.outstandingReceivedConns));
                     let aConns = new Map(Object.entries(response.acceptedConns));
                     let dConns = new Map(Object.entries(response.deniedConns));
-                    console.log(sConns);
-                    console.log(rConns);
-                    console.log(aConns);
-                    console.log(dConns);
 
                     this.setState({
                         connectionsSent: sConns,
@@ -92,7 +88,7 @@ class ConnectionPage extends React.Component{
         }
 
         if (this.state.wait) {
-            return (<div>Loading</div>)
+            return (<div className="loading-screen">Loading...</div>)
         }
 
 

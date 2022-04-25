@@ -11,8 +11,6 @@ const NotificationButton = ({notificationsReceivedData}) => {
         requestNum = requestNum + 1;
     });
 
-    // console.log("number of requests: " + requestNum);
-
     return(
         <div className='notification-button-container'>
             <div class="notification-button">

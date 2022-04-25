@@ -47,17 +47,17 @@ class MatchList extends React.Component{
             }
         };
 
-        if(this.firstRender === false){
-            matchListProps = this.state.newMatchList;
-        }else{
+        if (this.state.firstRender) {
             matchListProps = this.props.matchListProps;
+        }else{
+            matchListProps = this.state.newMatchList;
         }
         
         
         return (
             <div className='match-list-container'>
-            <div className="checkbox-container">
-            Show Only Users That Requested Connection
+            <div className="checkbox-container"><span className='checkbox-text'>
+            Show Only Users That Requested Connection</span>
                             <input
                             type="checkbox"
                             checked = {this.state.checked}

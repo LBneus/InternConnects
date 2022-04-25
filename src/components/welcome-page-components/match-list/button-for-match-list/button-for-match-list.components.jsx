@@ -24,8 +24,6 @@ class ButtonMatchList extends React.Component {
 
     componentDidMount() {
         this.determineStatus();
-        console.log(this.state.receivedConns)
-        console.log(this.state.deniedConns)
     }
 
     sendRequest() {
@@ -95,12 +93,11 @@ class ButtonMatchList extends React.Component {
 
 
     render() {
-        console.log(this.state.connStatus);
         if(this.state.connStatus === "received"){
             return(
                 <div className="accept-deny-buttons">
-                    <div className="accept-button">Accept</div>
-                    <div className="deny-button">Deny</div>
+                    <div className="accept-button" onClick={this.sendAcceptConnection}>Accept</div>
+                    <div className="deny-button" onClick={this.sendRejectConnection}>Deny</div>
                 </div>
             )
         }
