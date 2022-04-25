@@ -5,3 +5,20 @@
     padding: 3px;
     
 }
+
+.filter-list-container{
+     background-color: white;
+     margin: 10px 50px 10px 50px;
+     border-radius: 20px;
+     padding: 3px;
+    width: 435px;
+ }
+
+.filter-list-container:hover{
+    cursor: pointer;
+}
+
+.no-requests-message{
+  font-weight: bold;
+  margin: 10px;
+}

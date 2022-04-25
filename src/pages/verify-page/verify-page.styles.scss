@@ -6,6 +6,7 @@
     align-items: center;
     justify-content: center;
     margin-top: 13.5%;
+    text-align: center;
 
     .inputs-container{
         display: flex;
@@ -33,6 +34,14 @@
         font-weight: bold;
     }
 
+    .home-button{
+        width: 150px;
+        height: 50px;
+        border-radius: 15px;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+
     .switch-mode-button{
         width: 200px;
         height: 30px;
@@ -41,6 +50,10 @@
     }
 
     .log-in-button:hover{
+        cursor: pointer;
+    }
+    
+    .home-button:hover{
         cursor: pointer;
     }
 

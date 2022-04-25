@@ -23,7 +23,8 @@ class WelcomePage extends React.Component {
             blankField: false,
             nonEduEmail: false,
             signInFail: false,
-            signInFailMessage: ''
+            signInFailMessage: '',
+            createAccountSuccess: false
         }
         this.toggleAccountCreate = this.toggleAccountCreate.bind(this);
         this.sendLoginRequest = this.sendLoginRequest.bind(this);
@@ -47,6 +48,7 @@ class WelcomePage extends React.Component {
     }
 
     toggleAccountCreate() {
+        this.setState({signInFail: false})
         if (this.state.newAccount === true) {
             this.setState({blankField: false});
         }
@@ -54,7 +56,6 @@ class WelcomePage extends React.Component {
     }
 
     sendLoginRequest() {
-        this.setState({loading: true})
         if ((this.state.email === '') || (this.state.password === '')) {
             this.setState({blankField: true});
 
@@ -110,6 +111,12 @@ class WelcomePage extends React.Component {
             })
                 .then(response => response.json())
                 .then(response => {
+                    this.setState({loading: false})
+                    if (response.successful) {
+                        this.setState({createAccountSuccess: true})
+                    } else {
+                        this.setState({signInFail: true, signInFailMessage: response.message})
+                    }
                 })
                 .catch(err => {
                     console.log(err)
@@ -127,6 +134,7 @@ class WelcomePage extends React.Component {
 
         let changeModeMsg = this.state.newAccount ? "Switch To Log In" : "Switch to Create Account";
         let submitRequestMsg = this.state.newAccount ? "Create Account" : "Log In";
+        let buttonMsg = this.state.loading ? "Processing..." : submitRequestMsg;
 
         return (
             <div className="welcome-page">
@@ -157,9 +165,12 @@ class WelcomePage extends React.Component {
 
 
                 <button type="submit" className="log-in-button"
-                        onClick={this.state.newAccount ? this.sendCreateAccountRequest : this.sendLoginRequest}>{submitRequestMsg}</button>
+                        onClick={this.state.newAccount ? this.sendCreateAccountRequest : this.sendLoginRequest}>{buttonMsg}</button>
                 <button className="switch-mode-button" onClick={this.toggleAccountCreate}>{changeModeMsg}</button>
-
+                {this.state.createAccountSuccess &&
+                    <h5>Your account has been created.
+                        <br/>Please check your email for instructions on how to verify your account.
+                    </h5>}
                 {this.state.signInFail &&
                     <h5>Error: {this.state.signInFailMessage}</h5>}
             </div>

@@ -2,6 +2,7 @@ import React from "react";
 
 import "./verify-page.styles.scss"
 import {UUIDContext} from "../../UUIDContext";
+import {Redirect} from "react-router-dom";
 
 class VerifyPage extends React.Component {
 
@@ -13,9 +14,12 @@ class VerifyPage extends React.Component {
             verificationCode: '',
             isVerify: false,
             wasVerifyFail: false,
-            verifyFailMessage: ''
+            verifyFailMessage: '',
+            loading: false,
+            rdx: false,
         }
         this.sendVerifyRequest = this.sendVerifyRequest.bind(this);
+        this.takeMeHome = this.takeMeHome.bind(this);
     }
 
     setEmailVal = e => {
@@ -31,6 +35,7 @@ class VerifyPage extends React.Component {
     }
 
     sendVerifyRequest() {
+        this.setState({loading: true})
         fetch("https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/accounts/verify", {
             "method": "PUT",
             "body": JSON.stringify({
@@ -41,7 +46,8 @@ class VerifyPage extends React.Component {
         })
             .then(response => response.json())
             .then(response => {
-                if (response.success) {
+                this.setState({loading: false})
+                if (response.successful) {
                     this.setState({ isVerify: true, wasVerifyFail: false })
                 } else {
                     this.setState({ wasVerifyFail: true, verifyFailMessage: response.message })
@@ -52,10 +58,17 @@ class VerifyPage extends React.Component {
             })
     }
 
+    takeMeHome() {
+        this.setState({rdx: true})
+    }
+
     render() {
 
-        let changeModeMsg = this.state.newAccount ? "Switch To Log In" : "Switch to Create Account";
-        let submitRequestMsg = this.state.newAccount ? "Create Account" : "Log In";
+        let buttonMsg = this.state.loading ? "Processing..." : "Verify My Account";
+
+        if (this.state.rdx) {
+            return (<Redirect to={"/"}/>)
+        }
 
         return (
             <div className="verify-page">
@@ -68,31 +81,41 @@ class VerifyPage extends React.Component {
 
                     <div className="user-email-container">
                         <input type="email" className="user-email" placeholder={"Enter your email"}
-                           onChange={(e) => this.setEmailVal(e)}/>
+                               onChange={(e) => this.setEmailVal(e)}/>
                     </div>
-                    
+
                     <div className="user-password-container">
                         <input type="password" className="user-password" placeholder={"Enter your password"}
-                           onChange={(e) => this.setPasswordVal(e)}/>
+                               onChange={(e) => this.setPasswordVal(e)}/>
                     </div>
 
                     <div className="verification-code-container">
                         <input type="text" className="verification-code" placeholder={"Enter the verification code"}
-                           onChange={(e) => this.setVerificationCode(e)}/>
+                               onChange={(e) => this.setVerificationCode(e)}/>
                     </div>
 
                     <button type="submit" className="log-in-button"
-                            onClick={this.sendVerifyRequest}>Verify My Account</button>
+                            onClick={this.sendVerifyRequest}>{buttonMsg}</button>
 
-                    {this.state.wasVerifyFail && <div>
+                    {this.state.wasVerifyFail && <div align="center">
+                        <br/>
                         <div className="access-information-message">We're sorry there was the following error in your
-                            verification request:</div>
+                            verification request:
+                        </div>
                         <div className="access-information-message">{this.state.verifyFailMessage}</div>
                         <div className="access-information-message">Please try again.</div>
                     </div>}
                 </div>}
-                {this.state.isVerify && <div className="access-information-message">
-                    Thank you for verifying you account. You may now log in.
+                {this.state.isVerify && <div>
+                    <div>
+                        Thank you for verifying you account.
+                        <br/>
+                        You may now log in.
+                        <br/>
+                    </div>
+                    <button type="submit" className="home-button" onClick={this.takeMeHome}>Take
+                        me to the homepage.
+                    </button>
                 </div>}
             </div>
         );

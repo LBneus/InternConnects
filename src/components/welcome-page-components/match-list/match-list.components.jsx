@@ -8,71 +8,73 @@ class MatchList extends React.Component{
     constructor(){
         super();
         this.state = {
-            checkedState: true,
-            newMatchList: [],
-            firstRender: true
+            checkedState: false,
+            currList: [],
+            fullList: [],
+            connsList: []
         }
+        this.handleChange = this.handleChange.bind(this);
     }
-    
 
-    render(){
-        
-        var checked = this.state.checkedState;
+    componentDidMount() {
+        let matchListProps = this.props.matchListProps;
+        let receivedConnList = this.props.receivedConnList;
+        let sentConnList = this.props.sentConnList;
+        let acceptedConnList = this.props.acceptedConnList;
+        let deniedConnList = this.props.deniedConnList;
 
-        var matchListProps = this.props.matchListProps;
-        var receivedConnList = this.props.receivedConnList;
-        var sentConnList = this.props.sentConnList;
-        var acceptedConnList = this.props.acceptedConnList;
-        var deniedConnList = this.props.deniedConnList;
-
-        var originalMatchList = matchListProps;
-        var receivedKeys = [...receivedConnList.keys()];
-
-        var mappedMatchListProps = [];
-
+        let receivedKeys = [...receivedConnList.keys()];
+        let mappedMatchListProps = [];
         matchListProps.forEach(element => {
             if (receivedKeys.includes(element['upid'])) {
                 mappedMatchListProps.push(element);
             }
         });
-        
-        const handleChange = () => {
-            this.setState({checkedState : !checked});
-            this.setState({firstRender : false});
-            
-            if (this.state.checkedState === true) {
-                this.setState({newMatchList : mappedMatchListProps});
-            }else{
-                this.setState({newMatchList : originalMatchList});
-            }
-        };
 
-        if (this.state.firstRender) {
-            matchListProps = this.props.matchListProps;
-        }else{
-            matchListProps = this.state.newMatchList;
+        this.setState({
+            fullList: matchListProps,
+            currList: matchListProps,
+            connsList: mappedMatchListProps
+        })
+    }
+
+    handleChange() {
+        if (this.state.checkedState) {
+            this.setState({checkedState: false, currList: this.state.fullList})
+        } else {
+            this.setState({checkedState: true, currList: this.state.connsList})
         }
-        
-        
+    }
+
+    render() {
+
+        let list = this.state.currList.length === 0 ?
+            <div className="no-requests-message">We're sorry, currently there are no users who have sent you connection requests.<br/>Trying sending some yourself!</div> :
+            this.state.currList
+            .map(({upid, ...otherMatchListProps}) => (
+                <SingleMatch key={upid} {...otherMatchListProps}
+                             sl={this.props.sentConnList}
+                             rl={this.props.receivedConnList}
+                             al={this.props.acceptedConnList}
+                             dl={this.props.deniedConnList}
+                             id={upid}/>
+            ))
+
         return (
-            <div className='match-list-container'>
-            <div className="checkbox-container"><span className='checkbox-text'>
-            Show Only Users That Requested Connection</span>
-                            <input
+            <div>
+                <br/>
+                <div className='filter-list-container'>
+                    <div className="checkbox-container" onClick={this.handleChange}>
+                        <span className='checkbox-text'>
+            Show Only Users Who Wish To Connect</span>
+                        <input
                             type="checkbox"
-                            checked = {this.state.checked}
-                            onChange={handleChange}
-                        /></div>
-                        
-                {matchListProps
-                    .map(({upid, ...otherMatchListProps}) => (
-                    <SingleMatch key={upid} {...otherMatchListProps}
-                                    sl={sentConnList}
-                                    rl={receivedConnList}
-                                    al={acceptedConnList}
-                                    dl={deniedConnList}
-                                    id={upid}/>
-                    ))}
+                            checked={this.state.checkedState}/>
+                    </div>
+                </div>
+                <div className='match-list-container'>
+                    {list}
+                </div>
             </div>
         )
     }

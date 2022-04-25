@@ -91,13 +91,12 @@ class ConnectionPage extends React.Component{
             return (<div className="loading-screen">Loading...</div>)
         }
 
-
-
         return (
             <div>
-                <ConnectionPageHeader userName={'intern-connects'} userProfileData={this.state.userProfile} userConnectionsReceived={this.state.connectionsReceived}/>
-                <div className="match-list-filter-container">
-                </div>
+                <ConnectionPageHeader userName={'intern-connects'}
+                                      userProfileData={this.state.userProfile}
+                                      userConnectionsReceived={this.state.connectionsReceived}/>
+                <div className="match-list-filter-container"/>
 
                 {this.state.matchList.length > 0 ? 
                     <MatchList matchListProps={this.state.matchList}
@@ -105,7 +104,11 @@ class ConnectionPage extends React.Component{
                             receivedConnList={this.state.connectionsReceived}
                             acceptedConnList={this.state.connectionsAccepted}
                             deniedConnList={this.state.connectionsDenied}/>
-                : <></>
+                : <div className="loading-screen">
+                        <div>We're sorry.</div>
+                        <div>There are not yet any profiles matching your dates and location.</div>
+                        <div>Please check back later.</div>
+                </div>
                 }
             </div>
         );
