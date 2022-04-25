@@ -2,12 +2,15 @@ import React from "react";
 
 import ButtonMatchList from "../match-list/button-for-match-list/button-for-match-list.components";
 import LocationInput from "./location-input-info/location-input-info.components";
+import NotificationButton from "./notification-button/notification-button.components";
 import {Link} from "react-router-dom";
 
 import "./header-match-list.styles.scss";
 
-const ConnectionPageHeader = ({userProfileData}) => {
+const ConnectionPageHeader = ({userProfileData, userConnectionsReceived}) => {
 
+    const requestsReceived = [...userConnectionsReceived.keys()];
+    
         return (
             <div className="header-panel">
 
@@ -39,6 +42,8 @@ const ConnectionPageHeader = ({userProfileData}) => {
                         {/*<div className="user-profile-access">*/}
                         {/*    <ButtonMatchList ButtonName={"My Information"}/>*/}
                         {/*</div>*/}
+
+                        <NotificationButton notificationsReceivedData = {requestsReceived}/>
 
                     </div>
 

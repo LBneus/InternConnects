@@ -75,8 +75,8 @@ class ConnectionPage extends React.Component{
             })
     }
 
-    render() {
 
+    render() {
         let uuid = this.context.userUUID;
         if (uuid.toString() === '') {
             return(
@@ -97,7 +97,7 @@ class ConnectionPage extends React.Component{
 
         return (
             <div>
-                <ConnectionPageHeader userName={'intern-connects'} userProfileData={this.state.userProfile}/>
+                <ConnectionPageHeader userName={'intern-connects'} userProfileData={this.state.userProfile} userConnectionsReceived={this.state.connectionsReceived}/>
                 {this.state.matchList.length > 0 ? 
                 <MatchList matchListProps={this.state.matchList}
                            sentConnList={this.state.connectionsSent}
