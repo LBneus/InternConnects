@@ -23,7 +23,8 @@ class ConnectionPage extends React.Component{
             location: '',
             arrivalDate: '',
             departureDate: '',
-            wait: true
+            wait1: true,
+            wait2: true
         };
         this.fetchDataForPage = this.fetchDataForPage.bind(this)
     }
@@ -46,6 +47,7 @@ class ConnectionPage extends React.Component{
                         matchList: response.profileList,
                     });
                 }
+                this.setState({wait1: false})
             })
         fetch("https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/connect", {
             "method": "GET",
@@ -66,8 +68,8 @@ class ConnectionPage extends React.Component{
                         connectionsAccepted: aConns,
                         connectionsDenied: dConns
                     })
-                    this.setState({wait: false});
                 }
+                this.setState({wait2: false});
             })
     }
 
@@ -87,7 +89,7 @@ class ConnectionPage extends React.Component{
             )
         }
 
-        if (this.state.wait) {
+        if (this.state.wait1 || this.state.wait2) {
             return (<div className="loading-screen">Loading...</div>)
         }
 
