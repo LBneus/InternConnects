@@ -103,7 +103,7 @@ class AccountsPage extends React.Component {
                                 {(this.state.createProfileModal === true) &&
                                     <div className="create-profile-pop-up-container">
                                         <div className="create-profile-pop-up-content">
-                                            <button className="close-popup-btn" onClick={this.closeModal}>close</button>
+                                            <button className="close-popup-btn" onClick={this.closeModal}>Close</button>
                                             <CreateProfileForm/>
                                         </div>
                                     </div>}

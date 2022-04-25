@@ -293,7 +293,7 @@ class CreateProfileForm extends React.Component {
                             <div className="user-about">
                                 <label>About You</label>
                                 <br/>
-                                <input className="user-about-input"
+                                <textarea className="user-about-input"
                                        onChange={(e) => this.setUserBio(e)}/>
                             </div>
 
@@ -305,8 +305,9 @@ class CreateProfileForm extends React.Component {
 
                         </div>
                     </div>
-                    <button className="submit-create-form-button" onClick={this.sendCreateProfileRequest}>Submit
-                    </button>
+                    <div className="submit-create-form-button-container">
+                        <button className="submit-create-form-button" onClick={this.sendCreateProfileRequest}>Submit</button>
+                    </div>
                 </div>
             )
         }

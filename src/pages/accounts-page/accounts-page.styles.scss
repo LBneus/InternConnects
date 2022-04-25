@@ -49,8 +49,8 @@
 .create-profile-pop-up-content{
     position: relative;
     padding: 32px;
-    width: 70%;
-    height: 70%;
+    width: 60%;
+    height: 60%;
     background-color: rgb(10, 49, 96);
 
     display: flex;
@@ -63,5 +63,16 @@
         position: absolute;
         top: 16px;
         right: 16px;
+        width: 80px;
+        height: 30px;
+        border-radius: 20px;
+        background-color: white;
+        font-weight: bold;
+        font-size: 16px;
     }
+
+    .close-popup-btn:hover{
+        cursor: pointer;
+    }
+
 }

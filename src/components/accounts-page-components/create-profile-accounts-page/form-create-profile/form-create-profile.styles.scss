@@ -30,16 +30,36 @@
         margin-left: 20px;
     }
 
-    .submit-create-form-button{
-        position: absolute;
-        bottom: 16px;
-        right: 16px;
+    .submit-create-form-button-container{
+
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+
+        .submit-create-form-button{
+            width: 130px;
+            height: 30px;
+            border-radius: 20px;
+            background-color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .submit-create-form-button:hover{
+            cursor: pointer;
+        }
     }
+
+    
 }
 
 
 .user-about .user-about-input{
-    min-height: 200px;
+    min-height: 300px;
+    min-width: 300px;
+    font-size: 13px;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .user-priorities .user-about-input{
