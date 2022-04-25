@@ -1,6 +1,6 @@
 .button-match-list{
     height: 30px;
-    width: 140px;
+    min-width: 170px;
     border-radius: 10px;
     font-size: 15px;
     font-weight: 600;
@@ -10,4 +10,55 @@
 .button-match-list:hover{
     cursor: pointer;
     border: 2px solid blue;
+}
+
+.accept-deny-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    font-weight: bold;
+
+
+    .accept-button{
+        position: relative;
+        right: 10px;
+        background-color: green;
+        height: 30px;
+        min-width: 85px;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        // margin-right: 10px;
+        font-weight: bold;
+    }
+    .accept-button:hover{
+        cursor: pointer;
+        border: 2px solid blue;
+    }
+
+
+    .deny-button{
+        background-color: red;
+        height: 30px;
+        min-width: 85px;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        // margin-left: 10px;
+        font-weight: bold;
+    }
+    .deny-button:hover{
+        cursor: pointer;
+        border: 2px solid blue;
+    }
+
 }

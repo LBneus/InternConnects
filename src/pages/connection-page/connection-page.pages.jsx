@@ -95,20 +95,25 @@ class ConnectionPage extends React.Component{
             return (<div>Loading</div>)
         }
 
+
+
         return (
             <div>
                 <ConnectionPageHeader userName={'intern-connects'} userProfileData={this.state.userProfile} userConnectionsReceived={this.state.connectionsReceived}/>
+                <div className="match-list-filter-container">
+                </div>
+
                 {this.state.matchList.length > 0 ? 
-                <MatchList matchListProps={this.state.matchList}
-                           sentConnList={this.state.connectionsSent}
-                           receivedConnList={this.state.connectionsReceived}
-                           acceptedConnList={this.state.connectionsAccepted}
-                           deniedConnList={this.state.connectionsDenied}/>
+                    <MatchList matchListProps={this.state.matchList}
+                            sentConnList={this.state.connectionsSent}
+                            receivedConnList={this.state.connectionsReceived}
+                            acceptedConnList={this.state.connectionsAccepted}
+                            deniedConnList={this.state.connectionsDenied}/>
                 : <></>
                 }
             </div>
         );
-    }
+        }
 }
 
 ConnectionPage.contextType = UUIDContext;

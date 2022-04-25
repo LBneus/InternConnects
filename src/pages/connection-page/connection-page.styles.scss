@@ -1,0 +1,16 @@
+.match-list-filter-container{
+    margin: 5px 50px;
+
+
+    .filter-container{
+        background-color: transparent;
+        color: white;
+        display: flex;
+        flex-direction: row;
+
+        .checkbox-container{
+            margin-left: 10px;
+        }
+    }
+
+}

@@ -93,12 +93,24 @@ class ButtonMatchList extends React.Component {
     }
 
 
+
     render() {
-        return (
-            <button className="button-match-list" onClick={this.sendRequest}>
-                {this.state.buttonMessage}
-            </button>
-        )
+        console.log(this.state.connStatus);
+        if(this.state.connStatus === "received"){
+            return(
+                <div className="accept-deny-buttons">
+                    <div className="accept-button">Accept</div>
+                    <div className="deny-button">Deny</div>
+                </div>
+            )
+        }
+        else{
+            return (
+                <button className="button-match-list" onClick={this.sendRequest}>
+                    {this.state.buttonMessage}
+                </button>
+            )
+        }
     }
 }
 
