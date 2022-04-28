@@ -9,6 +9,7 @@ class ProfileForAccountsPage extends React.Component {
 
     constructor(props, context) {
         super(props, context);
+        this.state = ({loading: false});
         this.setGlobalUPID = this.setGlobalUPID.bind(this);
         this.deleteProfile = this.deleteProfile.bind(this);
     }
@@ -20,6 +21,7 @@ class ProfileForAccountsPage extends React.Component {
 
     deleteProfile(){
         const p = this.props.profile;
+        this.setState({loading: true});
 
         fetch("https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/profiles", {
             "method": "DELETE",
@@ -30,12 +32,16 @@ class ProfileForAccountsPage extends React.Component {
         })
             .then(response => response.json())
             .then(response => {
-                this.forceUpdate();
+                this.props.recall();
             })
     }
 
     render() {
         const p = this.props.profile;
+
+        if (this.state.loading) {
+            return (<div className="profile-container"><div className="user-info-container"><h3>Please wait...</h3></div></div>)
+        }
         return (
             <div className="profile-container">
                 <Link className="user-info-container" to="/connectionPage"

@@ -38,6 +38,7 @@ class AccountsPage extends React.Component {
     }
 
     fetchPageInfo() {
+        this.setState({loading: true});
         fetch("https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/homepage", {
             "method": "GET",
             "headers": {IC_UUID: this.context.userUUID}
@@ -84,12 +85,15 @@ class AccountsPage extends React.Component {
             <div className="accounts-profiles-container">
                     {(this.state.profileCount > 0) &&
                         <ProfileForAccountsPage profile={this.state.profileList[0]}
+                                                recall={this.fetchPageInfo}
                                                 className="already-created-profile"/>}
                     {(this.state.profileCount > 1) &&
                         <ProfileForAccountsPage profile={this.state.profileList[1]}
+                                                recall={this.fetchPageInfo}
                                                 className="already-created-profile"/>}
                     {(this.state.profileCount > 2) &&
                         <ProfileForAccountsPage profile={this.state.profileList[2]}
+                                                recall={this.fetchPageInfo}
                                                 className="already-created-profile"/>}
                     {(this.state.profileCount < 3) &&
                         <div className="create-new-profile">

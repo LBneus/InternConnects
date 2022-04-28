@@ -32,7 +32,9 @@ class CreateProfileForm extends React.Component {
 
             userPhotoPath: '',
             requestSuccess: false,
-            requestInProgress: false
+            requestInProgress: false,
+            zipIsNum: false,
+            emptyField: false
         }
         this.sendCreateProfileRequest = this.sendCreateProfileRequest.bind(this);
         this.NumberToMonth = this.NumberToMonth.bind(this);
@@ -46,45 +48,57 @@ class CreateProfileForm extends React.Component {
 
     sendCreateProfileRequest() {
 
-        let dMonth = this.NumberToMonth(parseInt(this.state.departureMonth));
-        let aMonth = this.NumberToMonth(parseInt(this.state.arrivalMonth));
+        if ((this.state.departureMonth === "") || (this.state.arrivalMonth === "") || (this.state.city === "")
+            || (this.state.state === "") || (this.state.zipCode === "") || (this.state.relocationPurpose === "")
+            || (this.state.hometown === "") || (this.state.university === "") || (this.state.majors === "")
+            || (this.state.minors === "") || (this.state.gradYear === "") || (this.state.gradSeason === "")
+            || (this.state.userPhotoPath === "") || (this.state.userBio === "")) {
+            this.setState({emptyField: true})
+        } else if (isNaN(this.state.zipCode)) {
+            this.setState({zipIsNum: true, emptyField: false})
+        } else {
+            let dMonth = this.NumberToMonth(parseInt(this.state.departureMonth));
+            let aMonth = this.NumberToMonth(parseInt(this.state.arrivalMonth));
 
-        let rDay = (this.state.permanentRelocation ? '01' : this.state.departureDay);
-        let rMonth = (this.state.permanentRelocation ? 'January' : dMonth);
-        let rYear = (this.state.permanentRelocation ? '3000' : this.state.departureYear);
+            let rDay = (this.state.permanentRelocation ? '01' : this.state.departureDay);
+            let rMonth = (this.state.permanentRelocation ? 'January' : dMonth);
+            let rYear = (this.state.permanentRelocation ? '3000' : this.state.departureYear);
 
-        this.setState({requestInProgress: true})
+            this.setState({requestInProgress: true})
 
-        fetch(" https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/profiles", {
-            "method": "POST",
-            "body": JSON.stringify({
-                IC_UUID: this.context.userUUID,
-                newProfile:
-                    {
-                        city: this.state.city,
-                        state: this.state.state,
-                        permanentRelocation: this.state.permanentRelocation,
-                        zipCode: this.state.zipCode,
-                        relocationPurpose: this.state.relocationPurpose,
-                        userBio: this.state.userBio,
-                        hometown: this.state.hometown,
-                        university: this.state.university,
-                        majors: this.state.majors,
-                        minors: this.state.minors,
-                        gradSeason: this.state.gradSeason,
-                        gradYear: this.state.gradYear,
+            fetch(" https://016oltoux6.execute-api.us-east-1.amazonaws.com/beta/profiles", {
+                "method": "POST",
+                "body": JSON.stringify({
+                    IC_UUID: this.context.userUUID,
+                    newProfile:
+                        {
+                            city: this.state.city,
+                            state: this.state.state,
+                            permanentRelocation: this.state.permanentRelocation,
+                            zipCode: this.state.zipCode,
+                            relocationPurpose: this.state.relocationPurpose,
+                            userBio: this.state.userBio,
+                            hometown: this.state.hometown,
+                            university: this.state.university,
+                            majors: this.state.majors,
+                            minors: this.state.minors,
+                            gradSeason: this.state.gradSeason,
+                            gradYear: this.state.gradYear,
 
-                        arrivalDay: this.state.arrivalDay,
-                        arrivalMonth: aMonth,
-                        arrivalYear: this.state.arrivalYear,
-                        departureDay: rDay,
-                        departureMonth: rMonth,
-                        departureYear: rYear,
-                        photoPath: this.state.userPhotoPath
-                    }
+                            arrivalDay: this.state.arrivalDay,
+                            arrivalMonth: aMonth,
+                            arrivalYear: this.state.arrivalYear,
+                            departureDay: rDay,
+                            departureMonth: rMonth,
+                            departureYear: rYear,
+                            photoPath: this.state.userPhotoPath
+                        }
+                })
             })
-        })
-            .then(response => {this.setState({requestSuccess: true, requestInProgress: false})})
+                .then(response => {
+                    this.setState({requestSuccess: true, requestInProgress: false})
+                })
+        }
     }
 
     setCityVal = e => {
@@ -191,8 +205,8 @@ class CreateProfileForm extends React.Component {
                                 <br/>
                                 <label htmlFor="user-state">State</label>
                                 <br/>
-                                <label htmlFor="user-permanentRelocation">Permanent Relocation</label>
-                                <br/>
+                                {/*<label htmlFor="user-permanentRelocation">Permanent Relocation</label>*/}
+                                {/*<br/>*/}
                                 <label htmlFor="user-zipCode">Zip Code</label>
                                 <br/>
                                 <label htmlFor="user-relocationPurpose">Relocation Purpose</label>
@@ -201,9 +215,9 @@ class CreateProfileForm extends React.Component {
                                 <br/>
                                 <label htmlFor="user-university">University</label>
                                 <br/>
-                                <label htmlFor="user-major">Majors</label>
+                                <label htmlFor="user-major">Major(s)</label>
                                 <br/>
-                                <label htmlFor="user-minor">Minors</label>
+                                <label htmlFor="user-minor">Minor(s)</label>
                                 <br/>
                                 <label htmlFor="user-grad-year">Graduation Year</label>
                                 <br/>
@@ -233,10 +247,10 @@ class CreateProfileForm extends React.Component {
                                            onChange={(e) => this.setStateVal(e)}/>
                                 </div>
 
-                                <div className="user-permanentRelocation">
-                                    <input name="user-permanentRelocation" type="checkbox"
-                                           onChange={(e) => this.setPermanentRelocation(e)}/>
-                                </div>
+                                {/*<div className="user-permanentRelocation">*/}
+                                {/*    <input name="user-permanentRelocation" type="checkbox"*/}
+                                {/*           onChange={(e) => this.setPermanentRelocation(e)}/>*/}
+                                {/*</div>*/}
 
                                 <div className="user-zipCode">
                                     <input name="user-zipCode"
@@ -308,6 +322,8 @@ class CreateProfileForm extends React.Component {
                     <div className="submit-create-form-button-container">
                         <button className="submit-create-form-button" onClick={this.sendCreateProfileRequest}>Submit</button>
                     </div>
+                    {this.state.emptyField && <h5>You must fill in all fields. Please try again.</h5>}
+                    {this.state.zipIsNum && <h5>The ZipCode must be a valid 5 digit number. Please try again.</h5>}
                 </div>
             )
         }
