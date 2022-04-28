@@ -54,7 +54,7 @@ class CreateProfileForm extends React.Component {
             || (this.state.minors === "") || (this.state.gradYear === "") || (this.state.gradSeason === "")
             || (this.state.userPhotoPath === "") || (this.state.userBio === "")) {
             this.setState({emptyField: true})
-        } else if (isNaN(this.state.zipCode)) {
+        } else if ((this.state.zipCode.length !== 5) || isNaN(this.state.zipCode)) {
             this.setState({zipIsNum: true, emptyField: false})
         } else {
             let dMonth = this.NumberToMonth(parseInt(this.state.departureMonth));
